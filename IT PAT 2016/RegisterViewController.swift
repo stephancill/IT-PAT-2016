@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController {
 	
 	let usernameTextField: UITextField = {
 		let tf = UITextField()
-		tf.placeholder = "Choose a username"
+		tf.placeholder = "Choose a display name"
 		tf.translatesAutoresizingMaskIntoConstraints = false
 		tf.autocapitalizationType = .none
 		return tf
@@ -74,7 +74,7 @@ class RegisterViewController: UIViewController {
 
 	func handleSubmitButtonPress() {
 		guard let username = usernameTextField.text, (usernameTextField.text?.characters.count)! > 0 else {
-			alertUser(viewController: self, message: "Please enter a valid username")
+			alertUser(viewController: self, message: "Please enter a valid display name.")
 			return
 		}
 		let changeRequest = currentUser?.profileChangeRequest()
@@ -89,14 +89,4 @@ class RegisterViewController: UIViewController {
 			}
 		}
 	}
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -78,18 +78,25 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 	
-		view.addSubview(titleLabel)
-		view.addSubview(inputContainerView)
-		view.addSubview(actionSegmentController)
-		view.addSubview(submitButton)
-		setupInputContainerView()
-		setupTitle()
-		setupButtons()
-		
-		view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-		
+//		if UserDefaults.standard.string(forKey: "currentUserEmail") != nil {
+		if false {
+			// User already logged in
+			let email = UserDefaults.standard.string(forKey: "currentUserEmail")
+			let password = UserDefaults.standard.string(forKey: "currentUserPassword")
+			handleLogin(email: email!, password: password!)
+		} else {
+			view.addSubview(titleLabel)
+			view.addSubview(inputContainerView)
+			view.addSubview(actionSegmentController)
+			view.addSubview(submitButton)
+			setupInputContainerView()
+			setupTitle()
+			setupButtons()
+			
+			view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
+			NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+			NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+		}
 		//Alert controller
 		let alertController: UIAlertController = UIAlertController(title: "Oops...", message: "Something isn't quite right, try again", preferredStyle: .alert)
 		let dismissAction: UIAlertAction = UIAlertAction(title: "Dismiss", style: .cancel)
@@ -99,6 +106,8 @@ class LoginViewController: UIViewController {
 		/*
 		TESTING INPUTS
 		*/
+		
+		
 		emailTextField.text = "stephanus.cilliers@gmail.com"
 		passwordTextField.text = "example"
     }
@@ -113,14 +122,14 @@ class LoginViewController: UIViewController {
 		view.endEditing(true)
 	}
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//		TODO sign user out from main menu and register user
-//		navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(logout))]
-
-	}
-	
 	func logout() {
 		try! FIRAuth.auth()?.signOut()
+		updateLocalLogin(email: nil, password: nil)
+	}
+	
+	func updateLocalLogin(email: String?, password: String?) {
+		UserDefaults.standard.set(email, forKey: "currentUserEmail")
+		UserDefaults.standard.set(password, forKey: "currentUserPassword")
 	}
 	
 	func setupTitle() {
@@ -135,6 +144,7 @@ class LoginViewController: UIViewController {
 		inputContainerView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 		inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -48).isActive = true
 		inputContainerView.heightAnchor.constraint(equalToConstant: 94).isActive = true
+		
 		
 		inputContainerView.addSubview(emailTextField)
 		emailTextField.leftAnchor.constraint(equalTo: inputContainerView.leftAnchor, constant: 12).isActive = true
@@ -218,11 +228,11 @@ class LoginViewController: UIViewController {
 		guard let email = emailTextField.text, let password = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6, isValidEmail(testStr: email) else {
 			//Present the AlertController
 			if !(isValidEmail(testStr: emailTextField.text!)) {
-				alertUser(viewController: self, message: "Invalid email")
+				alertUser(viewController: self, message: "Invalid email.")
 				return
 				
 			}else if (passwordTextField.text?.characters.count)! < 6 {
-				alertUser(viewController: self, message: "Passwords contain 6 or more characters on here...")
+				alertUser(viewController: self, message: "Password must contain 6 or more characters.")
 				return
 			}
 			return
@@ -249,6 +259,8 @@ class LoginViewController: UIViewController {
 					// Continue registration if necessary
 					self.performSegue(withIdentifier: "LoginToRegister", sender: self)
 				} else {
+					// Remeber user login cridentials
+					self.updateLocalLogin(email: email, password: password)
 					// Take user to main menu
 					self.performSegue(withIdentifier: "LoginToMenu", sender: self)
 				}
@@ -259,14 +271,23 @@ class LoginViewController: UIViewController {
 	
 	func handleRegister(email: String, password: String) {
 		FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-			if error != nil {
-				alertUser(viewController: self, message: error.debugDescription)
+			if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
+				switch errCode {
+				case .errorCodeEmailAlreadyInUse:
+					alertUser(viewController: self, message: "Email already in use.")
+				default:
+					alertUser(viewController: self)
+				}
 			} else {
+				// Remeber user login cridentials
 				currentUser = user
+				self.updateLocalLogin(email: email, password: password)
 				self.performSegue(withIdentifier: "LoginToRegister", sender: self)
 			}
 		}
 	}
+	
+	
 	
 	func isValidEmail(testStr:String) -> Bool {
 		let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"

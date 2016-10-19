@@ -9,20 +9,26 @@
 import UIKit
 import Firebase
 
+let defaultAlertMessage = "Something isn't quite right, try again."
+
 let alertController: UIAlertController = {
-	let alert: UIAlertController = UIAlertController(title: "Oops...", message: "Something isn't quite right, try again", preferredStyle: .alert)
-	alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+	
+	let alert: UIAlertController = UIAlertController(title: "Oops...", message: defaultAlertMessage, preferredStyle: .alert)
+	alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {(alertAction: UIAlertAction!) in
+		resetAlertMessage()
+	}))
 	return alert
 }()
 
 func alertUser(viewController: UIViewController, message: String?=alertController.message!) {
-	let tmpMessage = alertController.message
 	alertController.message = message
-	viewController.present(alertController, animated: true, completion: {
-		alertController.message = tmpMessage
-		return nil
-	}())
+	viewController.present(alertController, animated: true, completion: nil)
 }
+
+func resetAlertMessage() {
+	alertController.message = defaultAlertMessage
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
