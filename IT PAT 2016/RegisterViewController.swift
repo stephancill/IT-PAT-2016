@@ -77,7 +77,7 @@ class RegisterViewController: UIViewController {
 			alertUser(viewController: self, message: "Please enter a valid display name.")
 			return
 		}
-		let changeRequest = currentUser?.profileChangeRequest()
+		let changeRequest = uc.currentUser?.profileChangeRequest()
 		changeRequest?.displayName = username
 		changeRequest?.commitChanges { error in
 			if let error = error {

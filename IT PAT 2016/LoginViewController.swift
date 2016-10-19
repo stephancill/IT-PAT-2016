@@ -9,8 +9,6 @@
 import UIKit
 import Firebase
 
-var currentUser: FIRUser?
-
 class LoginViewController: UIViewController {
 	
 	var currentViewYOffset = 0
@@ -66,8 +64,8 @@ class LoginViewController: UIViewController {
 		return tf
 	}()
 	
-	let submitButton: UIButton  = {
-		let button = UIButton()
+	let submitButton: SubmissionButton  = {
+		let button = SubmissionButton()
 		button.backgroundColor = UIColor.white
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.layer.cornerRadius = 12
@@ -77,13 +75,13 @@ class LoginViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-	
+		uc.loginViewController = self
 //		if UserDefaults.standard.string(forKey: "currentUserEmail") != nil {
 		if false {
 			// User already logged in
 			let email = UserDefaults.standard.string(forKey: "currentUserEmail")
 			let password = UserDefaults.standard.string(forKey: "currentUserPassword")
-			handleLogin(email: email!, password: password!)
+			uc.handleLogin(email: email!, password: password!)
 		} else {
 			view.addSubview(titleLabel)
 			view.addSubview(inputContainerView)
@@ -124,12 +122,7 @@ class LoginViewController: UIViewController {
 	
 	func logout() {
 		try! FIRAuth.auth()?.signOut()
-		updateLocalLogin(email: nil, password: nil)
-	}
-	
-	func updateLocalLogin(email: String?, password: String?) {
-		UserDefaults.standard.set(email, forKey: "currentUserEmail")
-		UserDefaults.standard.set(password, forKey: "currentUserPassword")
+		uc.updateLocalLogin(email: nil, password: nil)
 	}
 	
 	func setupTitle() {
@@ -182,20 +175,20 @@ class LoginViewController: UIViewController {
 		submitButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor, multiplier: 1).isActive = true
 		submitButton.setTitleColor(view.backgroundColor, for: .normal)
 		submitButton.addTarget(self, action: #selector(handleSubmitButtonPress), for: .touchUpInside)
-		submitButton.addTarget(self, action: #selector(buttonDown), for: .touchDown)
-		submitButton.addTarget(self, action: #selector(buttonUp), for: .touchDragExit)
-		submitButton.addTarget(self, action: #selector(buttonDown), for: .touchDragEnter)
+//		submitButton.addTarget(self, action: #selector(buttonDown), for: .touchDown)
+//		submitButton.addTarget(self, action: #selector(buttonUp), for: .touchDragExit)
+//		submitButton.addTarget(self, action: #selector(buttonDown), for: .touchDragEnter)
 	}
 	
-	func buttonDown() {
-		let button = submitButton
-		button.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
-	}
-	
-	func buttonUp() {
-		let button = submitButton
-		button.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-	}
+//	func buttonDown() {
+//		let button = submitButton
+//		button.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
+//	}
+//	
+//	func buttonUp() {
+//		let button = submitButton
+//		button.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+//	}
 	
 	func keyboardWillShow(notification: NSNotification) {
 		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -223,7 +216,7 @@ class LoginViewController: UIViewController {
 	}
 
 	func handleSubmitButtonPress() {
-		buttonUp()
+		submitButton.buttonUp()
 		
 		guard let email = emailTextField.text, let password = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6, isValidEmail(testStr: email) else {
 			//Present the AlertController
@@ -240,52 +233,52 @@ class LoginViewController: UIViewController {
 		
 		switch actionSegmentController.selectedSegmentIndex {
 		case 0:
-			handleLogin(email: email, password: password)
+			uc.handleLogin(email: email, password: password)
 		case 1:
-			handleRegister(email: email, password: password)
+			uc.handleRegister(email: email, password: password)
 		default: break
 		}
 
 	}
 	
-	func handleLogin(email: String, password: String) {
-		FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-			if error != nil {
-				print("Error: \(error.debugDescription)")
-				alertUser(viewController: self)
-			} else {
-				currentUser = user
-				if currentUser?.displayName == nil {
-					// Continue registration if necessary
-					self.performSegue(withIdentifier: "LoginToRegister", sender: self)
-				} else {
-					// Remeber user login cridentials
-					self.updateLocalLogin(email: email, password: password)
-					// Take user to main menu
-					self.performSegue(withIdentifier: "LoginToMenu", sender: self)
-				}
-			}
-		}
-		
-	}
-	
-	func handleRegister(email: String, password: String) {
-		FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-			if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
-				switch errCode {
-				case .errorCodeEmailAlreadyInUse:
-					alertUser(viewController: self, message: "Email already in use.")
-				default:
-					alertUser(viewController: self)
-				}
-			} else {
-				// Remeber user login cridentials
-				currentUser = user
-				self.updateLocalLogin(email: email, password: password)
-				self.performSegue(withIdentifier: "LoginToRegister", sender: self)
-			}
-		}
-	}
+//	func handleLogin(email: String, password: String) {
+//		FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
+//			if error != nil {
+//				print("Error: \(error.debugDescription)")
+//				alertUser(viewController: self)
+//			} else {
+//				uc.currentUser = user
+//				if uc.currentUser?.displayName == nil {
+//					// Continue registration if necessary
+//					self.performSegue(withIdentifier: "LoginToRegister", sender: self)
+//				} else {
+//					// Remeber user login cridentials
+//					uc.updateLocalLogin(email: email, password: password)
+//					// Take user to main menu
+//					self.performSegue(withIdentifier: "LoginToMenu", sender: self)
+//				}
+//			}
+//		}
+//		
+//	}
+//	
+//	func handleRegister(email: String, password: String) {
+//		FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+//			if let errCode = FIRAuthErrorCode(rawValue: error!._code) {
+//				switch errCode {
+//				case .errorCodeEmailAlreadyInUse:
+//					alertUser(viewController: self, message: "Email already in use.")
+//				default:
+//					alertUser(viewController: self)
+//				}
+//			} else {
+//				// Remeber user login cridentials
+//				uc.currentUser = user
+//				uc.updateLocalLogin(email: email, password: password)
+//				self.performSegue(withIdentifier: "LoginToRegister", sender: self)
+//			}
+//		}
+//	}
 	
 	
 	
