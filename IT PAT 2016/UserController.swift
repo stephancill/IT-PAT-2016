@@ -12,8 +12,9 @@ class UserController {
 	var currentUser: FIRUser?
 	var loginViewController: UIViewController?
 	
-	func logout(user: FIRUser) {
+	func logout() {
 		try! FIRAuth.auth()?.signOut()
+		print("logged out")
 		updateLocalLogin(email: nil, password: nil)
 	}
 	
