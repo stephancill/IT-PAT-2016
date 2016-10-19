@@ -9,8 +9,10 @@
 import UIKit
 import Firebase
 
-let defaultAlertMessage = "Something isn't quite right, try again."
+let uc = UserController()
 
+// Set up alert controller
+let defaultAlertMessage = "Something isn't quite right, try again."
 let alertController: UIAlertController = {
 	
 	let alert: UIAlertController = UIAlertController(title: "Oops...", message: defaultAlertMessage, preferredStyle: .alert)
@@ -24,11 +26,9 @@ func alertUser(viewController: UIViewController, message: String?=alertControlle
 	alertController.message = message
 	viewController.present(alertController, animated: true, completion: nil)
 }
-
 func resetAlertMessage() {
 	alertController.message = defaultAlertMessage
 }
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -65,4 +65,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
