@@ -10,11 +10,16 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+	let logoutButton: SubmissionButton = {
+		let button = SubmissionButton()
+		button.setTitle("Logout", for: .normal)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
+	}()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-//		let tmp = navigationItem.backBarButtonItem
-//		navigationItem.backBarButtonItem = nil
-//		navigationItem.backBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(getter: tmp?.action))
+		setupButtons()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +31,19 @@ class MainViewController: UIViewController {
 		navigationController?.isNavigationBarHidden = true
 	}
 
+	func setupButtons() {
+		view.addSubview(logoutButton)
+		logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		logoutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+		logoutButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+		logoutButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+		logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+	}
+	
+	func logout() {
+		uc.logout()
+		performSegue(withIdentifier: "MainToLogin", sender: self)
+	}
     /*
     // MARK: - Navigation
 
