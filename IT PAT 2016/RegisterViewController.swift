@@ -51,6 +51,7 @@ class RegisterViewController: UIViewController {
     }
 	
 	func setupInputContainerView() {
+		// Add and position input objects.
 		inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		inputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 		inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -48).isActive = true
@@ -64,6 +65,7 @@ class RegisterViewController: UIViewController {
 	}
 	
 	func setupButtons() {
+		// Set up buttons in view.
 		submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		submitButton.leftAnchor.constraint(equalTo: inputContainerView.leftAnchor).isActive = true
 		submitButton.topAnchor.constraint(equalTo: inputContainerView.bottomAnchor, constant: 20).isActive = true

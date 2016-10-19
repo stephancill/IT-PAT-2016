@@ -77,12 +77,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 		uc.loginViewController = self
 		if UserDefaults.standard.string(forKey: "currentUserEmail") != nil {
-			// User already logged in
+			// User already logged in.
 			let email = UserDefaults.standard.string(forKey: "currentUserEmail")
 			let password = UserDefaults.standard.string(forKey: "currentUserPassword")
 			uc.handleLogin(email: email!, password: password!)
 		} else {
-			// Prepare login screen
+			// User not logged in, prepare login screen.
 			view.addSubview(titleLabel)
 			view.addSubview(inputContainerView)
 			view.addSubview(actionSegmentController)
@@ -95,10 +95,6 @@ class LoginViewController: UIViewController {
 			NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 			NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 		}
-		//Alert controller
-		let alertController: UIAlertController = UIAlertController(title: "Oops...", message: "Something isn't quite right, try again", preferredStyle: .alert)
-		let dismissAction: UIAlertAction = UIAlertAction(title: "Dismiss", style: .cancel)
-		alertController.addAction(dismissAction)
         // Do any additional setup after loading the view.
 		
 		/*
@@ -125,6 +121,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	func setupTitle() {
+		// Position and size title in view.
 		titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		titleLabel.widthAnchor.constraint(equalTo: inputContainerView.widthAnchor).isActive = true
 		titleLabel.bottomAnchor.constraint(equalTo: actionSegmentController.topAnchor, constant: -20).isActive = true
@@ -132,6 +129,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	func setupInputContainerView() {
+		// Add and position input objects.
 		inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		inputContainerView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 		inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -48).isActive = true
@@ -159,6 +157,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	func setupButtons() {
+		// Set up buttons in view.
 		actionSegmentController.leftAnchor.constraint(equalTo: inputContainerView.leftAnchor).isActive = true
 		actionSegmentController.bottomAnchor.constraint(equalTo: inputContainerView.topAnchor, constant: -20).isActive = true
 		actionSegmentController.widthAnchor.constraint(equalTo: inputContainerView.widthAnchor).isActive = true
@@ -176,6 +175,7 @@ class LoginViewController: UIViewController {
 		submitButton.addTarget(self, action: #selector(handleSubmitButtonPress), for: .touchUpInside)
 	}
 	
+	// Offset view to ensure visibility of all buttons/input fields.
 	func keyboardWillShow(notification: NSNotification) {
 		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
 			if self.view.frame.origin.y == 0 && keyboardSize.height > view.frame.height - submitButton.frame.maxY {
@@ -185,6 +185,7 @@ class LoginViewController: UIViewController {
 		}
 	}
 	
+	// Undo offset when keyboard is dismissed.
 	func keyboardWillHide(notification: NSNotification) {
 		if self.view.frame.origin.y != 0{
 			self.view.frame.origin.y += CGFloat(currentViewYOffset)
@@ -192,6 +193,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	func handleSegmentControllerValueChanged() {
+		// Update button names to correlate with Segment Controller.
 		switch actionSegmentController.selectedSegmentIndex {
 		case 0:
 			submitButton.setTitle("Login", for: .normal)
@@ -202,10 +204,10 @@ class LoginViewController: UIViewController {
 	}
 
 	func handleSubmitButtonPress() {
-		submitButton.buttonUp()
+		submitButton.buttonUp()		// Call to change colour back to default state.
 		
 		guard let email = emailTextField.text, let password = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6, isValidEmail(testStr: email) else {
-			//Present the AlertController
+			//Present the AlertController.
 			if !(isValidEmail(testStr: emailTextField.text!)) {
 				alertUser(viewController: self, message: "Invalid email.")
 				return
@@ -217,6 +219,7 @@ class LoginViewController: UIViewController {
 			return
 		}
 		
+		// Register or login dependent on segment controller.
 		switch actionSegmentController.selectedSegmentIndex {
 		case 0:
 			uc.handleLogin(email: email, password: password)

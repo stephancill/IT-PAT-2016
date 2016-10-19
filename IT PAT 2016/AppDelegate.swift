@@ -13,8 +13,8 @@ let uc = UserController()
 
 // Set up alert controller
 let defaultAlertMessage = "Something isn't quite right, try again."
+
 let alertController: UIAlertController = {
-	
 	let alert: UIAlertController = UIAlertController(title: "Oops...", message: defaultAlertMessage, preferredStyle: .alert)
 	alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {(alertAction: UIAlertAction!) in
 		resetAlertMessage()
