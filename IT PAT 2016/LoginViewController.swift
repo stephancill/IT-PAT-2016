@@ -72,22 +72,22 @@ class LoginViewController: UIViewController {
 		button.setTitle("Login", for: .normal)
 		return button
 	}()
-	
+		
     override func viewDidLoad() {
         super.viewDidLoad()
-		var loggedInSuccessfully = false
+		
 		uc.loginViewController = self
 		uc.activityIndicator = ActivityIndicator(parentView: self.view)
+		uc.emailTextField = emailTextField
 		
 		if UserDefaults.standard.string(forKey: "currentUserEmail") != nil {
-			// User already logged in.
+			// User previously logged in.
 			let email = UserDefaults.standard.string(forKey: "currentUserEmail")
 			let password = UserDefaults.standard.string(forKey: "currentUserPassword")
-			uc.handleLogin(email: email!, password: password!)
-			loggedInSuccessfully = uc.currentUser == nil
+			uc.handleLogin(email: email!, password: password!, sendEmail: false)
 		}
-		if loggedInSuccessfully != true {
-			// User not logged in, prepare login screen.
+		if UserDefaults.standard.string(forKey: "currentUserVerified") == "NO" {
+			// Prepare login screen.
 			view.addSubview(titleLabel)
 			view.addSubview(inputContainerView)
 			view.addSubview(actionSegmentController)
