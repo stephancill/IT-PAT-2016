@@ -12,35 +12,48 @@ class UserController {
 	var currentUser: FIRUser?
 	var loginViewController: UIViewController?
 	var activityIndicator: ActivityIndicator?
+	var emailTextField: UITextField?
 	
 	func logout() {
 		try! FIRAuth.auth()?.signOut()
+		print(currentUser?.email)
 		updateLocalLogin(email: nil, password: nil)
 	}
 	
-	func updateLocalLogin(email: String?, password: String?) {
+	func updateLocalLogin(email: String?, password: String?, verified: String?="NO") {
 		UserDefaults.standard.set(email, forKey: "currentUserEmail")
 		UserDefaults.standard.set(password, forKey: "currentUserPassword")
+		UserDefaults.standard.set(verified, forKey: "currentUserVerified")
 	}
 	
-	func handleLogin(email: String, password: String) {
+	func handleLogin(email: String, password: String, sendEmail: Bool?=true) {
 		activityIndicator?.show()
 		FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
 			if error != nil {
 				print("Error: \(error.debugDescription)")
 				alertUser(viewController: self.loginViewController!)
 				self.activityIndicator?.hide()
+				self.emailTextField?.text = UserDefaults.standard.string(forKey: "currentUserEmail")
 			} else {
 				self.currentUser = user
 				if self.currentUser?.displayName == nil {
 					// Continue registration if necessary
 					self.loginViewController?.performSegue(withIdentifier: "LoginToRegister", sender: self.loginViewController)
 				} else {
-					// Remeber user login cridentials
-					self.updateLocalLogin(email: email, password: password)
-					// Take user to main menu
-					self.loginViewController?.performSegue(withIdentifier: "LoginToMenu", sender: self.loginViewController)
-					
+					if !(user?.isEmailVerified)! {
+						self.emailTextField?.text = UserDefaults.standard.string(forKey: "currentUserEmail")
+						// Send verification email again
+//						alertUser(viewController: loginViewController?, message: "Please verify your email address")
+						if sendEmail! {
+							self.handleSendEmailVerification(user: user!, email: email, password: password)
+						}
+						self.activityIndicator?.hide()
+					} else {
+						// Remeber user login cridentials
+						self.updateLocalLogin(email: email, password: password, verified: "YES")
+						// Take user to main menu
+						self.loginViewController?.performSegue(withIdentifier: "LoginToMenu", sender: self.loginViewController)
+					}
 				}
 			}
 		}
@@ -61,10 +74,37 @@ class UserController {
 					self.activityIndicator?.hide()
 				}
 			} else {
-				// Remeber user login cridentials
 				uc.currentUser = user
-				uc.updateLocalLogin(email: email, password: password)
-				self.loginViewController?.performSegue(withIdentifier: "LoginToRegister", sender: self.loginViewController)
+				// Send verification email
+				self.handleSendEmailVerification(user: user!, nextSegueIdentifier: "LoginToRegister", email: email, password: password)
+			}
+		}
+	}
+	
+	func handleSendEmailVerification(user: FIRUser, nextSegueIdentifier: String?=nil, email: String, password: String) {
+		user.sendEmailVerification() { error in
+			if error != nil {
+				// An error happened.
+				alertUser(viewController: self.loginViewController!)
+			} else {
+				let alertController: UIAlertController = {
+					let alert: UIAlertController = UIAlertController(
+						title: "Verify your email address",
+						message: "Please follow the link in the email sent to \((self.currentUser?.email)!). ",
+						preferredStyle: .alert
+					)
+					alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {	(alertAction: UIAlertAction!) in
+							// Remeber user login cridentials
+							self.updateLocalLogin(email: email, password: password, verified: "NO")
+							// Take user to main menu
+							if nextSegueIdentifier != nil {
+								self.loginViewController?.performSegue(withIdentifier: nextSegueIdentifier!, sender: self.loginViewController)
+							}
+					}))
+					return alert
+				}()
+				self.loginViewController?.present(alertController, animated: true, completion: nil)
+				
 			}
 		}
 	}
@@ -78,11 +118,7 @@ class ActivityIndicator: UIView {
 	var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
 	var loadingView: UIView = UIView()
 	var parentView: UIView?
-	
-//	override init (frame : CGRect) {
-//		super.init(frame : frame)
-//	}
-	
+
 	required init(coder aDecoder: NSCoder) {
 		fatalError("This class does not support NSCoding")
 	}
@@ -97,7 +133,6 @@ class ActivityIndicator: UIView {
 			self.loadingView = UIView()
 			self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
 			self.loadingView.center = (self.parentView?.center)!
-			//		loadingView.backgroundColor = UIColor(rgba: "#444444")
 			self.loadingView.backgroundColor = UIColor.lightGray
 			self.loadingView.alpha = 0.7
 			self.loadingView.clipsToBounds = true
