@@ -75,13 +75,19 @@ class LoginViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		var loggedInSuccessfully = false
 		uc.loginViewController = self
+		uc.activityIndicator = ActivityIndicator(parentView: self.view)
+		
 		if UserDefaults.standard.string(forKey: "currentUserEmail") != nil {
 			// User already logged in.
 			let email = UserDefaults.standard.string(forKey: "currentUserEmail")
 			let password = UserDefaults.standard.string(forKey: "currentUserPassword")
 			uc.handleLogin(email: email!, password: password!)
-		} else {
+			loggedInSuccessfully = uc.currentUser != nil
+		}
+		
+		if loggedInSuccessfully != true {
 			// User not logged in, prepare login screen.
 			view.addSubview(titleLabel)
 			view.addSubview(inputContainerView)
@@ -107,6 +113,7 @@ class LoginViewController: UIViewController {
 	override func viewWillDisappear(_ animated: Bool) {
 		navigationController?.isNavigationBarHidden = false
 		view.endEditing(true)
+		uc.activityIndicator?.hide()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -132,9 +139,9 @@ class LoginViewController: UIViewController {
 		// Add and position input objects.
 		inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		inputContainerView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-		inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -48).isActive = true
+//		inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -48).isActive = true
+		inputContainerView.widthAnchor.constraint(equalToConstant: 265) .isActive = true
 		inputContainerView.heightAnchor.constraint(equalToConstant: 94).isActive = true
-		
 		
 		inputContainerView.addSubview(emailTextField)
 		emailTextField.leftAnchor.constraint(equalTo: inputContainerView.leftAnchor, constant: 12).isActive = true
@@ -204,6 +211,7 @@ class LoginViewController: UIViewController {
 	}
 
 	func handleSubmitButtonPress() {
+		view.endEditing(true)
 		submitButton.buttonUp()		// Call to change colour back to default state.
 		
 		guard let email = emailTextField.text, let password = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6, isValidEmail(testStr: email) else {
