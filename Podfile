@@ -8,12 +8,14 @@ target 'IT PAT 2016' do
   # Pods for IT PAT 2016
   pod 'Firebase', '>= 3.0.0'
   pod 'Firebase/Auth', '>= 3.0.0'
+  pod 'Firebase/Database'
 
   target 'IT PAT 2016Tests' do
     inherit! :search_paths
     # Pods for testing
     pod 'Firebase', '>= 3.0.0'
     pod 'Firebase/Auth', '>= 3.0.0'
+    pod 'Firebase/Database'
   end
 
   target 'IT PAT 2016UITests' do
