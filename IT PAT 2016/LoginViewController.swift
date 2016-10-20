@@ -205,7 +205,6 @@ class LoginViewController: UIViewController {
 
 	func handleSubmitButtonPress() {
 		view.endEditing(true)
-		submitButton.buttonUp()		// Call to change colour back to default state.
 		
 		guard let email = emailTextField.text, let password = passwordTextField.text, (passwordTextField.text?.characters.count)! >= 6, isValidEmail(testStr: email) else {
 			//Present the AlertController.
