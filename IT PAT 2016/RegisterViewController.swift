@@ -10,6 +10,8 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
+	var currentViewYOffset = 0
+	
 	let inputContainerView: UIView = {
 		let view = UIView()
 		view.backgroundColor = UIColor.white
@@ -26,13 +28,12 @@ class RegisterViewController: UIViewController {
 		return tf
 	}()
 	
-	let submitButton: UIButton  = {
-		let button = UIButton()
-		button.backgroundColor = UIColor(red: 122/255, green: 137/255, blue: 194/255, alpha: 1)
+	let submitButton: SubmissionButton  = {
+		let button = SubmissionButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.layer.cornerRadius = 12
 		button.setTitle("Register", for: .normal)
-		button.setTitleColor(UIColor.white, for: .normal)
+		button.backgroundColor = UIColor.white
 		return button
 	}()
 	
@@ -42,13 +43,28 @@ class RegisterViewController: UIViewController {
 		view.addSubview(submitButton)
 		setupInputContainerView()
 		setupButtons()
+		
+		view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	
+	func keyboardWillShow(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+			if self.view.frame.origin.y == 0 && keyboardSize.height > view.frame.height - submitButton.frame.maxY {
+				currentViewYOffset = Int(keyboardSize.height) - Int(view.frame.height - submitButton.frame.maxY)
+				self.view.frame.origin.y -= CGFloat(currentViewYOffset)
+			}
+		}
+	}
+	
+	// Undo offset when keyboard is dismissed.
+	func keyboardWillHide(notification: NSNotification) {
+		if self.view.frame.origin.y != 0{
+			self.view.frame.origin.y += CGFloat(currentViewYOffset)
+		}
+	}
 	
 	func setupInputContainerView() {
 		// Add and position input objects.
@@ -71,6 +87,7 @@ class RegisterViewController: UIViewController {
 		submitButton.topAnchor.constraint(equalTo: inputContainerView.bottomAnchor, constant: 20).isActive = true
 		submitButton.widthAnchor.constraint(equalTo: inputContainerView.widthAnchor).isActive = true
 		submitButton.heightAnchor.constraint(equalTo: usernameTextField.heightAnchor, multiplier: 1).isActive = true
+		submitButton.setTitleColor(view.backgroundColor, for: .normal)
 		submitButton.addTarget(self, action: #selector(handleSubmitButtonPress), for: .touchUpInside)
 	}
 
@@ -81,12 +98,16 @@ class RegisterViewController: UIViewController {
 		}
 		let changeRequest = uc.currentUser?.profileChangeRequest()
 		changeRequest?.displayName = username
+		uc.activityIndicator = ActivityIndicator(parentView: self.view)
+		uc.activityIndicator?.show()
 		changeRequest?.commitChanges { error in
 			if let error = error {
 				// An error happened.
 				alertUser(viewController: self, message: error.localizedDescription)
+				uc.activityIndicator?.hide()
 			} else {
 				// Profile updated.
+				uc.activityIndicator?.hide()
 				self.performSegue(withIdentifier: "RegisterToMenu", sender: self)
 			}
 		}
