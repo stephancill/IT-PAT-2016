@@ -10,9 +10,7 @@
         <scene sceneID="fsn-NX-Ffj">
             <objects>
                 <navigationController id="8pF-4f-rIC" sceneMemberID="viewController">
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2dv-ba-cZa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2dv-ba-cZa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -50,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="192.75362318840581" y="111.68478260869566"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Choose Name View Controller-->
         <scene sceneID="MOB-Le-KMC">
             <objects>
-                <viewController storyboardIdentifier="register" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DOe-vy-3Q1" customClass="RegisterViewController" customModule="IT_PAT_2016" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="register" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DOe-vy-3Q1" customClass="ChooseNameViewController" customModule="IT_PAT_2016" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tON-wY-4br"/>
                         <viewControllerLayoutGuide type="bottom" id="OCt-1N-a6O"/>
@@ -64,7 +62,7 @@
                         <color key="backgroundColor" red="0.30196078431372547" green="0.38823529411764707" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <segue destination="8pF-4f-rIC" kind="show" identifier="RegisterToMenu" id="YBQ-YV-SlN"/>
+                        <segue destination="8pF-4f-rIC" kind="show" identifier="ChooseNameToMenu" id="YBQ-YV-SlN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZt-qm-cbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -123,7 +121,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gt9-WH-Rw4" id="xsb-Qk-hhE">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

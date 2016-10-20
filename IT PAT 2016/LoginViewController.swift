@@ -84,9 +84,8 @@ class LoginViewController: UIViewController {
 			let email = UserDefaults.standard.string(forKey: "currentUserEmail")
 			let password = UserDefaults.standard.string(forKey: "currentUserPassword")
 			uc.handleLogin(email: email!, password: password!)
-			loggedInSuccessfully = uc.currentUser != nil
+			loggedInSuccessfully = uc.currentUser == nil
 		}
-		
 		if loggedInSuccessfully != true {
 			// User not logged in, prepare login screen.
 			view.addSubview(titleLabel)

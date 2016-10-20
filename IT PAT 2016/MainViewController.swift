@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
 		button.setTitle("Logout", for: .normal)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.layer.cornerRadius = 12
+		button.backgroundColor = UIColor.white
 		return button
 	}()
 	
@@ -42,8 +43,9 @@ class MainViewController: UIViewController {
 		view.addSubview(logoutButton)
 		logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		logoutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-		logoutButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-		logoutButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+		logoutButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+		logoutButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+		logoutButton.setTitleColor(view.backgroundColor, for: .normal)
 		logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
 	}
 	
@@ -51,7 +53,8 @@ class MainViewController: UIViewController {
 		displayNameLabel.text = uc.currentUser?.displayName
 		view.addSubview(displayNameLabel)
 		displayNameLabel.leftAnchor.constraint(equalTo: logoutButton.leftAnchor).isActive = true
-		displayNameLabel.bottomAnchor.constraint(equalTo: logoutButton.topAnchor).isActive = true
+//		displayNameLabel.bottomAnchor.constraint(equalTo: logoutButton.topAnchor).isActive = true
+		displayNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100)
 		displayNameLabel.widthAnchor.constraint(equalTo: logoutButton.widthAnchor).isActive = true
 		displayNameLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
 	}
