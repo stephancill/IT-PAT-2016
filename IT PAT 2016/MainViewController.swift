@@ -102,7 +102,7 @@ class MainViewController: UIViewController {
 		displayNameLabel.text = uc.currentUser?.displayName
 		view.addSubview(displayNameLabel)
 		displayNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		displayNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: CGFloat(55) * (CGFloat(menuOptions.count)+1) * -1).isActive = true
+		displayNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: (CGFloat(55) * (CGFloat(menuOptions.count)+1) * -1) / 2).isActive = true
 		displayNameLabel.widthAnchor.constraint(equalToConstant: 265).isActive = true
 		displayNameLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
 	}
@@ -120,8 +120,18 @@ class MainViewController: UIViewController {
 	}
 	
 	func logoutButtonPressed() {
-		uc.logout()
-		performSegue(withIdentifier: "MainToLogin", sender: self)
+		let refreshAlert = UIAlertController(title: "Logout", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
+		
+		refreshAlert.addAction(UIAlertAction(title: "Logout", style: .default, handler: { (action: UIAlertAction!) in
+			uc.logout(); self.performSegue(withIdentifier: "MainToLogin", sender: self);
+		}))
+		
+		refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+			print("")
+  }))
+		
+		present(refreshAlert, animated: true, completion: nil)
+		
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
