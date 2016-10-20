@@ -15,7 +15,6 @@ class UserController {
 	
 	func logout() {
 		try! FIRAuth.auth()?.signOut()
-		print("logged out")
 		updateLocalLogin(email: nil, password: nil)
 	}
 	
