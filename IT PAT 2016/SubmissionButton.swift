@@ -32,6 +32,7 @@ class SubmissionButton: UIButton {
 		addTarget(self, action: #selector(buttonDown), for: .touchDown)
 		addTarget(self, action: #selector(buttonUp), for: .touchDragExit)
 		addTarget(self, action: #selector(buttonDown), for: .touchDragEnter)
+		addTarget(self, action: #selector(buttonUp), for: .touchUpInside)
 	}
 	
 	func buttonDown() {
