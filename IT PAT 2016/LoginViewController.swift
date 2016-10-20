@@ -120,12 +120,6 @@ class LoginViewController: UIViewController {
 		view.endEditing(true)
 	}
 	
-	func logout() {
-		try! FIRAuth.auth()?.signOut()
-		print("Logged out")
-		uc.updateLocalLogin(email: nil, password: nil)
-	}
-	
 	func setupTitle() {
 		// Position and size title in view.
 		titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
