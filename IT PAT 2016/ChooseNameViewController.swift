@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class ChooseNameViewController: UIViewController {
 
 	var currentViewYOffset = 0
 	
@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController {
 		let button = SubmissionButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.layer.cornerRadius = 12
-		button.setTitle("Register", for: .normal)
+		button.setTitle("Continue", for: .normal)
 		button.backgroundColor = UIColor.white
 		return button
 	}()
@@ -108,7 +108,7 @@ class RegisterViewController: UIViewController {
 			} else {
 				// Profile updated.
 				uc.activityIndicator?.hide()
-				self.performSegue(withIdentifier: "RegisterToMenu", sender: self)
+				self.performSegue(withIdentifier: "ChooseNameToMenu", sender: self)
 			}
 		}
 	}
