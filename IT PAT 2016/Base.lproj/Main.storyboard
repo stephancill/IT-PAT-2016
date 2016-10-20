@@ -9,7 +9,10 @@
         <!--Navigation Controller-->
         <scene sceneID="fsn-NX-Ffj">
             <objects>
-                <navigationController id="8pF-4f-rIC" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="8pF-4f-rIC" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2dv-ba-cZa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -20,7 +23,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y6o-uq-JN3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1014" y="-643"/>
+            <point key="canvasLocation" x="95" y="112"/>
         </scene>
         <!--Login-->
         <scene sceneID="tne-QT-ifu">
@@ -46,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192.75362318840581" y="111.68478260869566"/>
+            <point key="canvasLocation" x="-1047" y="111"/>
         </scene>
         <!--Choose Name View Controller-->
         <scene sceneID="MOB-Le-KMC">
@@ -67,7 +70,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZt-qm-cbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="193" y="954"/>
+            <point key="canvasLocation" x="-1047" y="955"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="amI-Qf-9R0">
@@ -85,6 +88,9 @@
                     <navigationItem key="navigationItem" id="Jq3-b6-X6V"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="MainToLogin" modalTransitionStyle="flipHorizontal" id="qZt-Vm-prT"/>
+                        <segue destination="5Y8-ss-g6V" kind="show" identifier="MainToGame" id="RRh-Up-2GJ"/>
+                        <segue destination="Dtg-66-aiV" kind="show" identifier="MainToLeaderboards" id="voo-BF-Ngf"/>
+                        <segue destination="gdg-vG-KOO" kind="show" identifier="MainToSettings" id="yLJ-VW-k3X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVr-xH-FO0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -106,11 +112,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnf-5e-eTK">
                                 <items>
                                     <navigationItem title="Leaderboard" id="920-g6-bGq">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="EkQ-Vv-GPp">
-                                            <connections>
-                                                <segue destination="ba1-VE-scZ" kind="show" id="RVW-p7-cKv"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="EkQ-Vv-GPp"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -121,7 +123,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gt9-WH-Rw4" id="xsb-Qk-hhE">
-                                            <frame key="frameInset" width="375" height="44"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -159,11 +161,7 @@
                             <navigationBar autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xfq-hh-NTH">
                                 <items>
                                     <navigationItem title="Settings" id="OhX-Py-MfM">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="1XB-HI-pRH">
-                                            <connections>
-                                                <segue destination="ba1-VE-scZ" kind="show" id="pAD-ce-5SL"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="1XB-HI-pRH"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -178,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2C-ds-I0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1959" y="795"/>
+            <point key="canvasLocation" x="1956" y="955"/>
         </scene>
         <!--Game-->
         <scene sceneID="yTE-0D-EnY">
@@ -196,11 +194,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7is-ow-8KY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="-528"/>
+            <point key="canvasLocation" x="1956" y="-724"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="YBQ-YV-SlN"/>
-        <segue reference="fQx-Mc-mxo"/>
     </inferredMetricsTieBreakers>
 </document>
