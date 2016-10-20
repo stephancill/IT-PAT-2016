@@ -32,7 +32,7 @@ class ChooseNameViewController: UIViewController {
 		let button = SubmissionButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.layer.cornerRadius = 12
-		button.setTitle("Continue", for: .normal)
+		button.setTitle("Choose", for: .normal)
 		button.backgroundColor = UIColor.white
 		return button
 	}()
