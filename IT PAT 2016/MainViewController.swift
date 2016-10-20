@@ -14,17 +14,24 @@ class MainViewController: UIViewController {
 		let button = SubmissionButton()
 		button.setTitle("Logout", for: .normal)
 		button.translatesAutoresizingMaskIntoConstraints = false
+		button.layer.cornerRadius = 12
 		return button
+	}()
+	
+	let displayNameLabel: UILabel = {
+		let label = UILabel()
+		label.font = UIFont(name: "ComicSansMS", size: 100)
+		label.textColor = UIColor.white
+		label.text = "[Display Name]"
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.adjustsFontSizeToFitWidth = true
+		return label
 	}()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupButtons()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+		setupTitle()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +45,15 @@ class MainViewController: UIViewController {
 		logoutButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
 		logoutButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
 		logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+	}
+	
+	func setupTitle() {
+		displayNameLabel.text = uc.currentUser?.displayName
+		view.addSubview(displayNameLabel)
+		displayNameLabel.leftAnchor.constraint(equalTo: logoutButton.leftAnchor).isActive = true
+		displayNameLabel.bottomAnchor.constraint(equalTo: logoutButton.topAnchor).isActive = true
+		displayNameLabel.widthAnchor.constraint(equalTo: logoutButton.widthAnchor).isActive = true
+		displayNameLabel.heightAnchor.constraint(equalToConstant: 200).isActive = true
 	}
 	
 	func logout() {
