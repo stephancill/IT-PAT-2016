@@ -76,6 +76,14 @@ class MainViewController: UIViewController {
 		]
 		setupTitle()
 		setupButtons()
+		
+		if uc.emailVerified {
+			if let uid = uc.currentUser?.uid {
+				if let username = uc.currentUser?.displayName {
+					ref.child("users").child(uid).setValue(["username": username])
+				}
+			}
+		}
     }
 
 	override func viewWillAppear(_ animated: Bool) {

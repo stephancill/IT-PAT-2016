@@ -8,8 +8,10 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 let uc = UserController()
+var ref: FIRDatabaseReference!
 
 // Set up alert controller
 let defaultAlertMessage = "Something isn't quite right, try again."
@@ -38,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		FIRApp.configure()
+		ref = FIRDatabase.database().reference()
 		return true
 	}
 
