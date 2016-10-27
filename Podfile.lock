@@ -34,7 +34,7 @@ PODS:
 DEPENDENCIES:
   - Firebase (>= 3.0.0)
   - Firebase/Auth (>= 3.0.0)
-  - Firebase/Database
+  - Firebase/Database (>= 3.0.0)
 
 SPEC CHECKSUMS:
   Firebase: 6d4012da1598732a2b43f16d8355eca90f94ed59
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
 
-PODFILE CHECKSUM: f3ea1eec0579f2a40c9c9c9e8e8fccc2c137aa44
+PODFILE CHECKSUM: d9451a8655d41f18dd400853d45bec966e0a6ee1
 
 COCOAPODS: 1.0.0

@@ -11,6 +11,7 @@
 		3B4C4F3FB2123AA094D609EF /* Pods_IT_PAT_2016.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4494756344D0A5D72D9EDD /* Pods_IT_PAT_2016.framework */; };
 		8233097BDA11B899C4FA5BD2 /* Pods_IT_PAT_2016Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D60D23B3A3E94536229D35 /* Pods_IT_PAT_2016Tests.framework */; };
 		D426C7BA1DB52C4000D7020E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D426C7B91DB52C4000D7020E /* LoginViewController.swift */; };
+		D4310ED31DC2059F009EE5D2 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4310ED21DC2059F009EE5D2 /* ActivityIndicator.swift */; };
 		D44260A91DB6442D00EF097F /* ChooseNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44260A81DB6442D00EF097F /* ChooseNameViewController.swift */; };
 		D467A3A31DB7C33A00005551 /* SubmissionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467A3A21DB7C33A00005551 /* SubmissionButton.swift */; };
 		D467A3A51DB7C59F00005551 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467A3A41DB7C59F00005551 /* UserController.swift */; };
@@ -51,6 +52,7 @@
 		9EE8156445EDF8D58CC282F1 /* Pods-IT PAT 2016Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IT PAT 2016Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IT PAT 2016Tests/Pods-IT PAT 2016Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C9D60D23B3A3E94536229D35 /* Pods_IT_PAT_2016Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IT_PAT_2016Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D426C7B91DB52C4000D7020E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D4310ED21DC2059F009EE5D2 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		D44260A81DB6442D00EF097F /* ChooseNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseNameViewController.swift; sourceTree = "<group>"; };
 		D467A3A21DB7C33A00005551 /* SubmissionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionButton.swift; sourceTree = "<group>"; };
 		D467A3A41DB7C59F00005551 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D4310ED01DC0B610009EE5D2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D426C7B91DB52C4000D7020E /* LoginViewController.swift */,
+				D44260A81DB6442D00EF097F /* ChooseNameViewController.swift */,
+				D48D25A01DB6C3720009AEAC /* MainViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D4310ED11DC0B647009EE5D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D467A3A41DB7C59F00005551 /* UserController.swift */,
+				D467A3A21DB7C33A00005551 /* SubmissionButton.swift */,
+				D4310ED21DC2059F009EE5D2 /* ActivityIndicator.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D47A4CA71DB4B7CF00F3A740 = {
 			isa = PBXGroup;
 			children = (
@@ -152,11 +174,8 @@
 			children = (
 				D48D259F1DB6C08A0009AEAC /* IT PAT 2016.entitlements */,
 				D47A4CB31DB4B7CF00F3A740 /* AppDelegate.swift */,
-				D426C7B91DB52C4000D7020E /* LoginViewController.swift */,
-				D44260A81DB6442D00EF097F /* ChooseNameViewController.swift */,
-				D48D25A01DB6C3720009AEAC /* MainViewController.swift */,
-				D467A3A41DB7C59F00005551 /* UserController.swift */,
-				D467A3A21DB7C33A00005551 /* SubmissionButton.swift */,
+				D4310ED01DC0B610009EE5D2 /* View Controllers */,
+				D4310ED11DC0B647009EE5D2 /* Models */,
 				D47A4CB71DB4B7CF00F3A740 /* Main.storyboard */,
 				D47A4CBC1DB4B7CF00F3A740 /* LaunchScreen.storyboard */,
 				D47A4CBA1DB4B7CF00F3A740 /* Assets.xcassets */,
@@ -472,6 +491,7 @@
 				D44260A91DB6442D00EF097F /* ChooseNameViewController.swift in Sources */,
 				D47A4CB41DB4B7CF00F3A740 /* AppDelegate.swift in Sources */,
 				D426C7BA1DB52C4000D7020E /* LoginViewController.swift in Sources */,
+				D4310ED31DC2059F009EE5D2 /* ActivityIndicator.swift in Sources */,
 				D467A3A31DB7C33A00005551 /* SubmissionButton.swift in Sources */,
 				D48D25A11DB6C3720009AEAC /* MainViewController.swift in Sources */,
 			);
