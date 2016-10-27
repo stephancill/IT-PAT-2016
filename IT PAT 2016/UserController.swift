@@ -13,6 +13,7 @@ class UserController {
 	var loginViewController: UIViewController?
 	var activityIndicator: ActivityIndicator?
 	var emailTextField: UITextField?
+	var emailVerified: Bool = false
 	
 	func logout() {
 		try! FIRAuth.auth()?.signOut()
@@ -49,6 +50,7 @@ class UserController {
 						}
 						self.activityIndicator?.hide()
 					} else {
+						self.emailVerified = true
 						// Remeber user login cridentials
 						self.updateLocalLogin(email: email, password: password, verified: "YES")
 						// Take user to main menu
@@ -87,6 +89,7 @@ class UserController {
 				// An error happened.
 				alertUser(viewController: self.loginViewController!)
 			} else {
+				// Create an AlertController to notify the user of confirmation email
 				let alertController: UIAlertController = {
 					let alert: UIAlertController = UIAlertController(
 						title: "Verify your email address",
@@ -98,60 +101,16 @@ class UserController {
 							self.updateLocalLogin(email: email, password: password, verified: "NO")
 							// Take user to main menu
 							if nextSegueIdentifier != nil {
-								self.loginViewController?.performSegue(withIdentifier: nextSegueIdentifier!, sender: self.loginViewController)
+								// Has the user specified a segue?
+								self.loginViewController?.performSegue(
+									withIdentifier: nextSegueIdentifier!,
+									sender: self.loginViewController)
 							}
 					}))
 					return alert
 				}()
 				self.loginViewController?.present(alertController, animated: true, completion: nil)
-				
 			}
-		}
-	}
-	
-	/* UI */
-	
-}
-
-
-class ActivityIndicator: UIView {
-	var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-	var loadingView: UIView = UIView()
-	var parentView: UIView?
-
-	required init(coder aDecoder: NSCoder) {
-		fatalError("This class does not support NSCoding")
-	}
-	
-	init (parentView: UIView){
-		super.init(frame: CGRect.zero)
-		self.parentView = parentView
-	}
-	
-	func show() {
-		DispatchQueue.main.async {
-			self.loadingView = UIView()
-			self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
-			self.loadingView.center = (self.parentView?.center)!
-			self.loadingView.backgroundColor = UIColor.lightGray
-			self.loadingView.alpha = 0.7
-			self.loadingView.clipsToBounds = true
-			self.loadingView.layer.cornerRadius = 10
-			
-			self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-			self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
-			self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
-			
-			self.loadingView.addSubview(self.spinner)
-			self.parentView?.addSubview(self.loadingView)
-			self.spinner.startAnimating()
-		}
-	}
-	
-	func hide() {
-		DispatchQueue.main.async {
-			self.spinner.stopAnimating()
-			self.loadingView.removeFromSuperview()
 		}
 	}
 }
