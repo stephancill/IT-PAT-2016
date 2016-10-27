@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
 			let password = UserDefaults.standard.string(forKey: "currentUserPassword")
 			uc.handleLogin(email: email!, password: password!, sendEmail: false)
 		}
-		if UserDefaults.standard.string(forKey: "currentUserVerified") == "NO" {
+		if UserDefaults.standard.string(forKey: "currentUserVerified") != "YES" {
 			// Prepare login screen.
 			view.addSubview(titleLabel)
 			view.addSubview(inputContainerView)
