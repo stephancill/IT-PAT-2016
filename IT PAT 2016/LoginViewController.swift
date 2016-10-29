@@ -78,7 +78,6 @@ class LoginViewController: UIViewController {
 		
 		uc.loginViewController = self
 		uc.activityIndicator = ActivityIndicator(parentView: self.view)
-		uc.emailTextField = emailTextField
 		
 		if UserDefaults.standard.string(forKey: "currentUserEmail") != nil {
 			// User previously logged in.
