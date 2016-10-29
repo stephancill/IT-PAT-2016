@@ -22,7 +22,8 @@ class ActivityIndicator: UIView {
 		self.parentView = parentView
 	}
 	
-	func show() {
+	func show(parentView: UIView) {
+		self.parentView = parentView
 		DispatchQueue.main.async {
 			self.loadingView = UIView()
 			self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
