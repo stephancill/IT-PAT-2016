@@ -37,18 +37,23 @@ class GameController {
 		}
 	}
 	
-	func pickNewWord(difficulty: Int=0) {
+	func pickNewWord(difficulty: Int?=0) {
 		/* 
 		Randomly pick a new word from the loaded list of words within the specified difficulty range
 		*/
-		if difficulty < difficulties.count - 1 {
-			currentDifficulty = difficulty
-			let difficultyIndex = difficulties[difficulties.index(after: difficulty)]
-			let difficultyRange = difficulties[difficulties.index(after: difficulty+1)] - difficulties[difficulties.index(after: difficulty)]
+		var targetDifficulty = currentDifficulty
+		if (difficulty != nil) {
+			targetDifficulty = difficulty!
+		}
+		if targetDifficulty < difficulties.count - 1 {
+			currentDifficulty = difficulty!
+			let difficultyIndex = difficulties[difficulties.index(after: targetDifficulty)]
+			let difficultyRange = difficulties[difficulties.index(after: targetDifficulty+1)] - difficulties[difficulties.index(after: targetDifficulty)]
 			let random = difficultyIndex + Int(arc4random_uniform(UInt32((difficultyRange))))
 			currentWord = dictionary?[(dictionary?.index(after: random))!]
 			getDefinition()
 		}
+		
 	}
 	
 	func getDefinition(for word: String?=nil) {
@@ -62,16 +67,15 @@ class GameController {
 		}
 		lookup?.definitions(forWord: targetWord, completion: { (definitions: [Any]?, error) in
 			if (error != nil) {
-				print("HELLO")
 				print(error.debugDescription)
-				alertUser(viewController: self.gameViewController!, message: error.debugDescription)
+				alertUser(viewController: self.gameViewController!, message: "An error has occurred. Please check your internet connection.")
 				
 			} else {
 				if (definitions?.count)! > 0 && !("\(definitions)".contains("Definition: See")) {
 					self.sayCurrentWord()
 					result = "\(("\((definitions!.first)!)".components(separatedBy: ";").first?.replacingOccurrences(of: targetWord!, with: "[word]"))!)"
 					self.gameViewController?.scene?.definitionLabel.text = result!
-					print("HELLO \(result!)")
+					print("HELLO \(self.currentWord): \(result!)")
 					
 				} else {
 					print("HELLO choosing new word")
@@ -91,5 +95,15 @@ class GameController {
 		utterance.rate = 0.4
 		utterance.voice = AVSpeechSynthesisVoice(language: "en-ZA")
 		speechSynthesizer.speak(utterance)
+	}
+	
+	func checkAnswer(text: String) {
+		print("\(currentWord) - \(text)")
+		if (text == currentWord) {
+			gameViewController?.scene?.answerTextField.text = ""
+			pickNewWord()
+		} else if text.characters.count >= (currentWord?.characters.count)! {
+			gameViewController?.scene?.answerTextField.text = ""
+		}
 	}
 }

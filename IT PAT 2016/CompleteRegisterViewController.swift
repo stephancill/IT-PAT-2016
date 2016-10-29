@@ -63,7 +63,7 @@ class ChooseNameViewController: UIViewController {
 		// Add and position input objects.
 		inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		inputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-		inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -48).isActive = true
+		inputContainerView.widthAnchor.constraint(equalToConstant: 256).isActive = true
 		inputContainerView.heightAnchor.constraint(equalToConstant: 47).isActive = true
 		
 		inputContainerView.addSubview(usernameTextField)
