@@ -28,14 +28,7 @@ class ChooseNameViewController: UIViewController {
 		return tf
 	}()
 	
-	let submitButton: SubmissionButton  = {
-		let button = SubmissionButton()
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.layer.cornerRadius = 12
-		button.setTitle("Choose", for: .normal)
-		button.backgroundColor = UIColor.white
-		return button
-	}()
+	let submitButton = SubmissionButton(named: "Choose")
 	
     override func viewDidLoad() {
         super.viewDidLoad()

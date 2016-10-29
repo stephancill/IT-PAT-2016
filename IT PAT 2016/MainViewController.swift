@@ -21,41 +21,10 @@ class MainViewController: UIViewController {
 		return label
 	}()
 	
-	let playButton: SubmissionButton = {
-		let button = SubmissionButton()
-		button.setTitle("Play", for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.layer.cornerRadius = 12
-		button.backgroundColor = UIColor.white
-		return button
-	}()
-	
-	let leaderboardsButton: SubmissionButton = {
-		let button = SubmissionButton()
-		button.setTitle("Leaderboards", for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.layer.cornerRadius = 12
-		button.backgroundColor = UIColor.white
-		return button
-	}()
-	
-	let settingsButton: SubmissionButton = {
-		let button = SubmissionButton()
-		button.setTitle("Settings", for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.layer.cornerRadius = 12
-		button.backgroundColor = UIColor.white
-		return button
-	}()
-	
-	let logoutButton: SubmissionButton = {
-		let button = SubmissionButton()
-		button.setTitle("Logout", for: .normal)
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.layer.cornerRadius = 12
-		button.backgroundColor = UIColor.white
-		return button
-	}()
+	let playButton = SubmissionButton(named: "Play")
+	let leaderboardsButton = SubmissionButton(named: "Leaderboards")
+	let settingsButton = SubmissionButton(named: "Settings")
+	let logoutButton = SubmissionButton(named: "Logout")
 	
 	var menuOptions: [SubmissionButton] = []
 	var menuOptionsSelectors: [Selector] = []
@@ -76,14 +45,8 @@ class MainViewController: UIViewController {
 		]
 		setupTitle()
 		setupButtons()
-		
-		if uc.emailVerified {
-			if let uid = uc.currentUser?.uid {
-				if let username = uc.currentUser?.displayName {
-					ref.child("users").child(uid).setValue(["username": username])
-				}
-			}
-		}
+		dbc.update(key: "username", value: (uc.currentUser?.displayName)!, for: (uc.currentUser?.uid)!)
+		gc.loadWords()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -136,7 +99,7 @@ class MainViewController: UIViewController {
 		
 		refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
 			print("")
-  }))
+		}))
 		
 		present(refreshAlert, animated: true, completion: nil)
 		

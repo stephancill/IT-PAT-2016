@@ -23,12 +23,20 @@ class SubmissionButton: UIButton {
 		self.setup()
 	}
 	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
+	init(named: String) {
+		super.init(frame: CGRect.zero)
+		self.setTitle(named, for: .normal)
 		self.setup()
 	}
+//	override init(frame: CGRect) {
+//		
+//	}
 	
 	func setup() {
+		translatesAutoresizingMaskIntoConstraints = false
+		layer.cornerRadius = 12
+		backgroundColor = UIColor.white
+		
 		addTarget(self, action: #selector(buttonDown), for: .touchDown)
 		addTarget(self, action: #selector(buttonUp), for: .touchDragExit)
 		addTarget(self, action: #selector(buttonDown), for: .touchDragEnter)

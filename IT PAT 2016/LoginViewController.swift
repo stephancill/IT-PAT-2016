@@ -64,15 +64,8 @@ class LoginViewController: UIViewController {
 		return tf
 	}()
 	
-	let submitButton: SubmissionButton  = {
-		let button = SubmissionButton()
-		button.backgroundColor = UIColor.white
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.layer.cornerRadius = 12
-		button.setTitle("Login", for: .normal)
-		return button
-	}()
-		
+	let submitButton = SubmissionButton(named: "Login")
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		

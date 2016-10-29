@@ -12,16 +12,18 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 	
+	var scene: GameScene?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationController?.isNavigationBarHidden = false
 		
 		if let view = self.view as! SKView? {
 			// Load the SKScene from 'GameScene.sks'
-			let scene = GameScene()
+			scene = GameScene()
 			// Set the scale mode to scale to fit the window
-			scene.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-			scene.scaleMode = .fill
+			scene?.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+			scene?.scaleMode = .fill
 			// Present the scene
 			view.presentScene(scene)
 			
@@ -30,6 +32,7 @@ class GameViewController: UIViewController {
 			view.showsFPS = true
 			view.showsNodeCount = true
 		}
+		gc.gameViewController = self
 	}
 	
 	override var shouldAutorotate: Bool {

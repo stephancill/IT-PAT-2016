@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import HNKWordLookup
 
 let uc = UserController()
 let dbc = DatabaseController()
@@ -42,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		FIRApp.configure()
 		dbc.configure()
+		gc.configure()
 		return true
 	}
 
