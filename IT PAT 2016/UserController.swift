@@ -10,9 +10,8 @@ import Firebase
 
 class UserController {
 	var currentUser: FIRUser?
-	var loginViewController: UIViewController?
+	var loginViewController: LoginViewController?
 	var activityIndicator: ActivityIndicator?
-	var emailTextField: UITextField?
 	var emailVerified: Bool = false
 	
 	func logout() {
@@ -28,13 +27,13 @@ class UserController {
 	}
 	
 	func handleLogin(email: String, password: String, sendEmail: Bool?=true) {
-		activityIndicator?.show()
+		activityIndicator?.show(parentView: (loginViewController?.view)!)
 		FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
 			if error != nil {
 				print("Error: \(error.debugDescription)")
 				alertUser(viewController: self.loginViewController!)
 				self.activityIndicator?.hide()
-				self.emailTextField?.text = UserDefaults.standard.string(forKey: "currentUserEmail")
+				self.loginViewController?.emailTextField.text = UserDefaults.standard.string(forKey: "currentUserEmail")
 			} else {
 				self.currentUser = user
 				if self.currentUser?.displayName == nil {
@@ -42,9 +41,8 @@ class UserController {
 					self.loginViewController?.performSegue(withIdentifier: "LoginToRegister", sender: self.loginViewController)
 				} else {
 					if !(user?.isEmailVerified)! {
-						self.emailTextField?.text = UserDefaults.standard.string(forKey: "currentUserEmail")
+						self.loginViewController?.emailTextField.text = UserDefaults.standard.string(forKey: "currentUserEmail")
 						// Send verification email again
-//						alertUser(viewController: loginViewController?, message: "Please verify your email address")
 						if sendEmail! {
 							self.handleSendEmailVerification(user: user!, email: email, password: password)
 						}
@@ -63,7 +61,7 @@ class UserController {
 	}
 	
 	func handleRegister(email: String, password: String) {
-		activityIndicator?.show()
+		activityIndicator?.show(parentView: (loginViewController?.view)!)
 		FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
 			if error != nil {
 				if let errCode = FIRAuthErrorCode(rawValue: error!._code) {

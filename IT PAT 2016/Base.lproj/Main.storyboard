@@ -13,7 +13,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2dv-ba-cZa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2dv-ba-cZa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -123,7 +123,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gt9-WH-Rw4" id="xsb-Qk-hhE">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -181,12 +181,12 @@
         <!--Game-->
         <scene sceneID="yTE-0D-EnY">
             <objects>
-                <viewController storyboardIdentifier="game" title="Game" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Y8-ss-g6V" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="game" title="Game" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Y8-ss-g6V" customClass="GameViewController" customModule="IT_PAT_2016" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CuZ-XK-nWo"/>
                         <viewControllerLayoutGuide type="bottom" id="uSD-7U-Dtx"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lpE-mR-ya3">
+                    <view key="view" contentMode="scaleToFill" id="lpE-mR-ya3" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -194,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7is-ow-8KY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1956" y="-724"/>
+            <point key="canvasLocation" x="1956" y="-724.58770614692662"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

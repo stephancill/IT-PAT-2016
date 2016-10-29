@@ -99,7 +99,7 @@ class ChooseNameViewController: UIViewController {
 		let changeRequest = uc.currentUser?.profileChangeRequest()
 		changeRequest?.displayName = username
 		uc.activityIndicator = ActivityIndicator(parentView: self.view)
-		uc.activityIndicator?.show()
+		uc.activityIndicator?.show(parentView: self.view)
 		changeRequest?.commitChanges { error in
 			if let error = error {
 				// An error happened.
