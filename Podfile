@@ -9,6 +9,7 @@ target 'IT PAT 2016' do
   pod 'Firebase', '>= 3.0.0'
   pod 'Firebase/Auth', '>= 3.0.0'
   pod 'Firebase/Database'
+  pod "HNKWordLookup", "~> 1.1"
 
   target 'IT PAT 2016Tests' do
     inherit! :search_paths
@@ -16,6 +17,7 @@ target 'IT PAT 2016' do
     pod 'Firebase', '>= 3.0.0'
     pod 'Firebase/Auth', '>= 3.0.0'
     pod 'Firebase/Database'
+    pod "HNKWordLookup", "~> 1.1"
   end
 
   target 'IT PAT 2016UITests' do
