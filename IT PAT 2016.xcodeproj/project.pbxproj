@@ -28,6 +28,9 @@
 		D48D25A11DB6C3720009AEAC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D25A01DB6C3720009AEAC /* MainViewController.swift */; };
 		D4C9873E1DB5F92C00888068 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4C9873D1DB5F92C00888068 /* Comic Sans MS.ttf */; };
 		D4C987401DB6043300888068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4C9873F1DB6043300888068 /* GoogleService-Info.plist */; };
+		D4D348B01DC6086600373EBC /* LetterBlockArrayElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D348AF1DC6086600373EBC /* LetterBlockArrayElement.swift */; };
+		D4D348B21DC63F5F00373EBC /* LetterBlockArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D348B11DC63F5F00373EBC /* LetterBlockArray.swift */; };
+		D4DE57021DC681D5003D5AB2 /* LetterBlockTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE57011DC681D5003D5AB2 /* LetterBlockTextField.swift */; };
 		D4FD71301DC48C9A0015AFED /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = D4FD712F1DC48C9A0015AFED /* words.txt */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +84,9 @@
 		D48D25A01DB6C3720009AEAC /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D4C9873D1DB5F92C00888068 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		D4C9873F1DB6043300888068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D4D348AF1DC6086600373EBC /* LetterBlockArrayElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterBlockArrayElement.swift; sourceTree = "<group>"; };
+		D4D348B11DC63F5F00373EBC /* LetterBlockArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterBlockArray.swift; sourceTree = "<group>"; };
+		D4DE57011DC681D5003D5AB2 /* LetterBlockTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterBlockTextField.swift; sourceTree = "<group>"; };
 		D4FD712F1DC48C9A0015AFED /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 		DC0FDC0633CC729AB47586FF /* Pods-IT PAT 2016Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IT PAT 2016Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IT PAT 2016Tests/Pods-IT PAT 2016Tests.release.xcconfig"; sourceTree = "<group>"; };
 		F875FF356D2FE83A55AEBBB1 /* Pods_IT_PAT_2016UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IT_PAT_2016UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +163,9 @@
 				D4310EDF1DC39245009EE5D2 /* GameController.swift */,
 				D4310ED21DC2059F009EE5D2 /* ActivityIndicator.swift */,
 				D467A3A21DB7C33A00005551 /* SubmissionButton.swift */,
+				D4D348AF1DC6086600373EBC /* LetterBlockArrayElement.swift */,
+				D4DE57011DC681D5003D5AB2 /* LetterBlockTextField.swift */,
+				D4D348B11DC63F5F00373EBC /* LetterBlockArray.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -511,9 +520,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4D348B21DC63F5F00373EBC /* LetterBlockArray.swift in Sources */,
 				D4310EDB1DC35923009EE5D2 /* GameViewController.swift in Sources */,
 				D467A3A51DB7C59F00005551 /* UserController.swift in Sources */,
 				D44260A91DB6442D00EF097F /* CompleteRegisterViewController.swift in Sources */,
+				D4D348B01DC6086600373EBC /* LetterBlockArrayElement.swift in Sources */,
 				D47A4CB41DB4B7CF00F3A740 /* AppDelegate.swift in Sources */,
 				D4310ED91DC35882009EE5D2 /* GameScene.swift in Sources */,
 				D426C7BA1DB52C4000D7020E /* LoginViewController.swift in Sources */,
@@ -522,6 +533,7 @@
 				D4310EE01DC39245009EE5D2 /* GameController.swift in Sources */,
 				D467A3A31DB7C33A00005551 /* SubmissionButton.swift in Sources */,
 				D48D25A11DB6C3720009AEAC /* MainViewController.swift in Sources */,
+				D4DE57021DC681D5003D5AB2 /* LetterBlockTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

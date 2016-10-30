@@ -14,13 +14,13 @@ import SpriteKit
 class GameController {
 	// TODO dictionary, choose random word based on difficulty
 	var gameViewController: GameViewController?
-	let difficulties: [Int] = [0, 1634, 6904, 17135, 34842, 58709, 88700, 121101, 151979, 177992, 198454, 213393, 223158, 229083, 232460, 234273, 235115, 235543, 235741, 235823, 235864, 235881]
+	let difficulties: [Int] = [0, 4347, 12844, 27910, 48462, 74896, 103729, 131653, 155426, 174263, 188140, 197291, 202876, 206099, 207837, 208652, 209069, 209263, 209344, 209384, 209400]
 	var dictionary: [String]?
 	var lookup: HNKLookup? = nil
 	
 	var currentWord: String? = nil
 	var currentDifficulty: Int = 0
-	
+	var currentScore: Int = 0
 	
 	func configure() {
 		loadWords()
@@ -47,9 +47,10 @@ class GameController {
 		}
 		if targetDifficulty < difficulties.count - 1 {
 			currentDifficulty = difficulty!
-			let difficultyIndex = difficulties[difficulties.index(after: targetDifficulty)]
-			let difficultyRange = difficulties[difficulties.index(after: targetDifficulty+1)] - difficulties[difficulties.index(after: targetDifficulty)]
+			let difficultyIndex = difficulties[difficulties.index(targetDifficulty, offsetBy: 0) ]
+			let difficultyRange = difficulties[difficulties.index(targetDifficulty, offsetBy: 1)] - difficulties[difficulties.index(targetDifficulty, offsetBy: 0)]
 			let random = difficultyIndex + Int(arc4random_uniform(UInt32((difficultyRange))))
+			print("HELLO \(difficultyIndex), \(difficultyRange), \(random)")
 			currentWord = dictionary?[(dictionary?.index(after: random))!]
 			getDefinition()
 		}
@@ -90,6 +91,7 @@ class GameController {
 		/*
 		Speak the current word
 		*/
+		print(currentWord)
 		let speechSynthesizer = AVSpeechSynthesizer()
 		let utterance = AVSpeechUtterance(string: currentWord!)
 		utterance.rate = 0.4
@@ -97,13 +99,30 @@ class GameController {
 		speechSynthesizer.speak(utterance)
 	}
 	
-	func checkAnswer(text: String) {
+	func checkAnswer() {
+		/*
+		Check if the users input is correct
+		*/
+		var text = ""
+		for block in (gameViewController?.scene?.inputContainerView?.letterBlocks)! {
+			text = "\(text)\(block.textField.text!)"
+		}
 		print("\(currentWord) - \(text)")
 		if (text == currentWord) {
-			gameViewController?.scene?.answerTextField.text = ""
-			pickNewWord()
+			// Correct
+			gameViewController?.scene?.animateInputContainerView(to: #colorLiteral(red: 0.328330636, green: 0.693198204, blue: 0.3570930958, alpha: 1) )
+			for block in (gameViewController?.scene?.inputContainerView?.letterBlocks)! {
+				block.textField.text = ""
+			}
+			gameViewController?.view.endEditing(true)
+			let _ = gameViewController?.scene?.inputContainerView?.letterBlocks[0].textField.becomeFirstResponder()
+			pickNewWord(difficulty: currentDifficulty)
 		} else if text.characters.count >= (currentWord?.characters.count)! {
-			gameViewController?.scene?.answerTextField.text = ""
+			gameViewController?.scene?.animateInputContainerView(to: #colorLiteral(red: 0.7995337248, green: 0.2348510623, blue: 0.3945492506, alpha: 1) )
 		}
+	}
+	
+	func updateScore(with points: Int) {
+		
 	}
 }
