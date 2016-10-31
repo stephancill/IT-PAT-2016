@@ -1,0 +1,6 @@
+{
+  "name": "IT PAT 2016",
+  "tagline": "Spelling Bee App",
+  "body": "### Welcome to IT PAT 2016 (Sample App)\r\nSample App is a simple game. Once you have logged in, select Play to launch the fun! A word will be read out by our beautiful South African AVSpeechSynthesizer, Tessa. The definition of the word will be on display (courtesy of Wordnik.com) and it's up to YOU to spell out the word correctly! Be careful, misspelling 5 words will mean the end of the game and you wouldn't want that if you want to beat your high score would you?\r\n\r\n\r\n\r\n### Support or Contact\r\nHaving trouble with Pages? Check out our [documentation](https://help.github.com/pages) or [contact support](https://github.com/contact) and we’ll help you sort it out.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
