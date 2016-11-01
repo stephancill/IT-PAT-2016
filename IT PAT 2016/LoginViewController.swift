@@ -66,6 +66,13 @@ class LoginViewController: UIViewController {
 	
 	let submitButton = SubmissionButton(named: "Login")
 	
+	let websiteLabel: UIButton = {
+		let label = UIButton()
+		label.setTitle("Website and Support", for: .normal)
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -84,30 +91,29 @@ class LoginViewController: UIViewController {
 			view.addSubview(inputContainerView)
 			view.addSubview(actionSegmentController)
 			view.addSubview(submitButton)
+			view.addSubview(websiteLabel)
+			
 			setupInputContainerView()
 			setupTitle()
 			setupButtons()
+			
 			
 			view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
 			NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 			NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 		}
-        // Do any additional setup after loading the view.
 		
-		/*
-		TESTING INPUTS
-		*/
-//		emailTextField.text = "stephanus.cilliers@gmail.com"
-//		passwordTextField.text = "example"
     }
 	
 	override func viewWillDisappear(_ animated: Bool) {
+		// Executed when user moves to another view
 		navigationController?.isNavigationBarHidden = false
 		view.endEditing(true)
 		uc.activityIndicator?.hide()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
+		// Executed when view is about to appear
 		navigationController?.isNavigationBarHidden = true
 		view.endEditing(true)
 	}
@@ -124,7 +130,6 @@ class LoginViewController: UIViewController {
 		// Add and position input objects.
 		inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 		inputContainerView.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//		inputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -48).isActive = true
 		inputContainerView.widthAnchor.constraint(equalToConstant: 265) .isActive = true
 		inputContainerView.heightAnchor.constraint(equalToConstant: 94).isActive = true
 		
@@ -165,6 +170,19 @@ class LoginViewController: UIViewController {
 		submitButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor, multiplier: 1).isActive = true
 		submitButton.setTitleColor(view.backgroundColor, for: .normal)
 		submitButton.addTarget(self, action: #selector(handleSubmitButtonPress), for: .touchUpInside)
+		
+		websiteLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		websiteLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+		websiteLabel.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+		websiteLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+		websiteLabel.addTarget(self, action: #selector(openWebsiteURL), for: .touchUpInside)
+	}
+	
+	func openWebsiteURL() {
+		// Open website URL in default browser
+		let targetURL = URL(string: "https://stephancill.github.io/IT-PAT-2016/")
+		let application = UIApplication.shared
+		application.openURL(targetURL!)
 	}
 	
 	// Offset view to ensure visibility of all buttons/input fields.
@@ -223,12 +241,11 @@ class LoginViewController: UIViewController {
 	}
 	
 	func isValidEmail(testStr:String) -> Bool {
+		// Validate email
 		let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 		let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
 		return emailTest.evaluate(with: testStr)
 	}
-	
-	
 
 }
 

@@ -15,18 +15,28 @@ class UserController {
 	var emailVerified: Bool = false
 	
 	func logout() {
+		/*
+		Logout current user
+		*/
 		try! FIRAuth.auth()?.signOut()
 		print(currentUser?.email)
 		updateLocalLogin(email: nil, password: nil)
 	}
 	
-	func updateLocalLogin(email: String?, password: String?, verified: String?="NO") {
+	func updateLocalLogin(email: String?, password: String?, verified: String?="NO"){
+		/*
+		Save user cridentials locally
+		*/
 		UserDefaults.standard.set(email, forKey: "currentUserEmail")
 		UserDefaults.standard.set(password, forKey: "currentUserPassword")
 		UserDefaults.standard.set(verified, forKey: "currentUserVerified")
 	}
 	
 	func handleLogin(email: String, password: String, sendEmail: Bool?=true) {
+		/*
+		Log user in, move to next view
+		*/
+		
 		activityIndicator?.show(parentView: (loginViewController?.view)!)
 		FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
 			if error != nil {
@@ -34,6 +44,7 @@ class UserController {
 				alertUser(viewController: self.loginViewController!)
 				self.activityIndicator?.hide()
 				self.loginViewController?.emailTextField.text = UserDefaults.standard.string(forKey: "currentUserEmail")
+				self.updateLocalLogin(email: "", password: "")
 			} else {
 				self.currentUser = user
 				if self.currentUser?.displayName == nil {
@@ -61,6 +72,10 @@ class UserController {
 	}
 	
 	func handleRegister(email: String, password: String) {
+		/*
+		Handle user register, go to next screen
+		*/
+		
 		activityIndicator?.show(parentView: (loginViewController?.view)!)
 		FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
 			if error != nil {
@@ -82,6 +97,9 @@ class UserController {
 	}
 	
 	func handleSendEmailVerification(user: FIRUser, nextSegueIdentifier: String?=nil, email: String, password: String) {
+		/*
+		Send verification email and notify user
+		*/
 		user.sendEmailVerification() { error in
 			if error != nil {
 				// An error happened.

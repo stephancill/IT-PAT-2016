@@ -21,6 +21,16 @@ class MainViewController: UIViewController {
 		return label
 	}()
 	
+	let highScoreLabel: UILabel = {
+		let label = UILabel()
+		label.font = UIFont(name: "ComicSansMS", size: 20)
+		label.textColor = UIColor.white
+		label.text = ""
+		label.translatesAutoresizingMaskIntoConstraints = false
+		label.textAlignment = .center
+		return label
+	}()
+	
 	let playButton = SubmissionButton(named: "Play")
 	let leaderboardsButton = SubmissionButton(named: "Leaderboards")
 	let settingsButton = SubmissionButton(named: "Settings")
@@ -43,14 +53,31 @@ class MainViewController: UIViewController {
 			#selector(settingsButtonPressed),
 			#selector(logoutButtonPressed)
 		]
+		
+		
+		dbc.updateUsername(username: (uc.currentUser?.displayName)!)
 		setupTitle()
 		setupButtons()
-		dbc.update(key: "username", value: (uc.currentUser?.displayName)!, for: (uc.currentUser?.uid)!)
+		if let tmp = dbc.getHighScore(update: highScoreLabel) {
+			gc.currentHighScore = Int(tmp)!
+		}
+		view.addSubview(highScoreLabel)
+		highScoreLabel.bottomAnchor.constraint(equalTo: playButton.topAnchor).isActive = true
+		highScoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		highScoreLabel.widthAnchor.constraint(equalToConstant: 265).isActive = true
+		highScoreLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
 		gc.loadWords()
+		
     }
 
 	override func viewWillAppear(_ animated: Bool) {
 		navigationController?.isNavigationBarHidden = true
+		if let tmp = dbc.getHighScore(update: highScoreLabel) {
+			gc.currentHighScore = Int(tmp)!
+		}
+		displayNameLabel.text = uc.currentUser?.displayName
+		
+		gc.currentDifficulty = UserDefaults.standard.integer(forKey: "startingDifficulty")
 	}
 
 	func setupButtons() {
@@ -109,14 +136,5 @@ class MainViewController: UIViewController {
 		navigationController?.isNavigationBarHidden = false
 	}
 	
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

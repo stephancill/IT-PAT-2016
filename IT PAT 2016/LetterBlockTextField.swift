@@ -20,6 +20,22 @@ class LetterBlockTextField: UITextField {
 	
 	var previous: LetterBlockTextField?
 	
+	init() {
+		super.init(frame: CGRect.zero)
+		placeholder = "."
+		translatesAutoresizingMaskIntoConstraints = false
+		keyboardType = .alphabet
+		autocapitalizationType = .none
+		autocorrectionType = .no
+		returnKeyType = .done
+		textAlignment = .center
+		isUserInteractionEnabled = true
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 	override func deleteBackward() {
 		// Move to previous text field in array when backspace is pressed
 		if (text?.characters.count)! > 0 {

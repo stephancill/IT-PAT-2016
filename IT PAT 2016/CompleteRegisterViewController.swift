@@ -89,10 +89,12 @@ class ChooseNameViewController: UIViewController {
 			alertUser(viewController: self, message: "Please enter a valid display name.")
 			return
 		}
+		// Change username
 		let changeRequest = uc.currentUser?.profileChangeRequest()
 		changeRequest?.displayName = username
 		uc.activityIndicator = ActivityIndicator(parentView: self.view)
 		uc.activityIndicator?.show(parentView: self.view)
+		
 		changeRequest?.commitChanges { error in
 			if let error = error {
 				// An error happened.
@@ -100,6 +102,7 @@ class ChooseNameViewController: UIViewController {
 				uc.activityIndicator?.hide()
 			} else {
 				// Profile updated.
+				dbc.updateHighScore(newScore: 0)
 				uc.activityIndicator?.hide()
 				self.performSegue(withIdentifier: "ChooseNameToMenu", sender: self)
 			}

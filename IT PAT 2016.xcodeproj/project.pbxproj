@@ -17,6 +17,10 @@
 		D4310EDB1DC35923009EE5D2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4310EDA1DC35923009EE5D2 /* GameViewController.swift */; };
 		D4310EE01DC39245009EE5D2 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4310EDF1DC39245009EE5D2 /* GameController.swift */; };
 		D44260A91DB6442D00EF097F /* CompleteRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44260A81DB6442D00EF097F /* CompleteRegisterViewController.swift */; };
+		D457AA1F1DC7BBA500E7C1B7 /* XArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D457AA1E1DC7BBA500E7C1B7 /* XArray.swift */; };
+		D457AA221DC7FBAC00E7C1B7 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D457AA211DC7FBAC00E7C1B7 /* LeaderboardViewController.swift */; };
+		D457AA241DC8134F00E7C1B7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D457AA231DC8134F00E7C1B7 /* TableViewCell.swift */; };
+		D457AA261DC8168700E7C1B7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D457AA251DC8168700E7C1B7 /* SettingsViewController.swift */; };
 		D467A3A31DB7C33A00005551 /* SubmissionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467A3A21DB7C33A00005551 /* SubmissionButton.swift */; };
 		D467A3A51DB7C59F00005551 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D467A3A41DB7C59F00005551 /* UserController.swift */; };
 		D47A4CB41DB4B7CF00F3A740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47A4CB31DB4B7CF00F3A740 /* AppDelegate.swift */; };
@@ -66,6 +70,10 @@
 		D4310EDA1DC35923009EE5D2 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D4310EDF1DC39245009EE5D2 /* GameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		D44260A81DB6442D00EF097F /* CompleteRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteRegisterViewController.swift; sourceTree = "<group>"; };
+		D457AA1E1DC7BBA500E7C1B7 /* XArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XArray.swift; sourceTree = "<group>"; };
+		D457AA211DC7FBAC00E7C1B7 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		D457AA231DC8134F00E7C1B7 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		D457AA251DC8168700E7C1B7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D467A3A21DB7C33A00005551 /* SubmissionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionButton.swift; sourceTree = "<group>"; };
 		D467A3A41DB7C59F00005551 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		D47A4CB01DB4B7CF00F3A740 /* IT PAT 2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IT PAT 2016.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +158,8 @@
 				D44260A81DB6442D00EF097F /* CompleteRegisterViewController.swift */,
 				D48D25A01DB6C3720009AEAC /* MainViewController.swift */,
 				D4310EDA1DC35923009EE5D2 /* GameViewController.swift */,
+				D457AA211DC7FBAC00E7C1B7 /* LeaderboardViewController.swift */,
+				D457AA251DC8168700E7C1B7 /* SettingsViewController.swift */,
 				D4310EDC1DC38767009EE5D2 /* Game */,
 			);
 			name = "View Controllers";
@@ -161,11 +171,7 @@
 				D467A3A41DB7C59F00005551 /* UserController.swift */,
 				D4310ED41DC329B4009EE5D2 /* DatabaseController.swift */,
 				D4310EDF1DC39245009EE5D2 /* GameController.swift */,
-				D4310ED21DC2059F009EE5D2 /* ActivityIndicator.swift */,
-				D467A3A21DB7C33A00005551 /* SubmissionButton.swift */,
-				D4D348AF1DC6086600373EBC /* LetterBlockArrayElement.swift */,
-				D4DE57011DC681D5003D5AB2 /* LetterBlockTextField.swift */,
-				D4D348B11DC63F5F00373EBC /* LetterBlockArray.swift */,
+				D457AA201DC7D12400E7C1B7 /* Subclasses */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -176,6 +182,20 @@
 				D4310ED81DC35882009EE5D2 /* GameScene.swift */,
 			);
 			name = Game;
+			sourceTree = "<group>";
+		};
+		D457AA201DC7D12400E7C1B7 /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				D4310ED21DC2059F009EE5D2 /* ActivityIndicator.swift */,
+				D467A3A21DB7C33A00005551 /* SubmissionButton.swift */,
+				D4D348AF1DC6086600373EBC /* LetterBlockArrayElement.swift */,
+				D4DE57011DC681D5003D5AB2 /* LetterBlockTextField.swift */,
+				D4D348B11DC63F5F00373EBC /* LetterBlockArray.swift */,
+				D457AA1E1DC7BBA500E7C1B7 /* XArray.swift */,
+				D457AA231DC8134F00E7C1B7 /* TableViewCell.swift */,
+			);
+			name = Subclasses;
 			sourceTree = "<group>";
 		};
 		D47A4CA71DB4B7CF00F3A740 = {
@@ -524,6 +544,7 @@
 				D4310EDB1DC35923009EE5D2 /* GameViewController.swift in Sources */,
 				D467A3A51DB7C59F00005551 /* UserController.swift in Sources */,
 				D44260A91DB6442D00EF097F /* CompleteRegisterViewController.swift in Sources */,
+				D457AA1F1DC7BBA500E7C1B7 /* XArray.swift in Sources */,
 				D4D348B01DC6086600373EBC /* LetterBlockArrayElement.swift in Sources */,
 				D47A4CB41DB4B7CF00F3A740 /* AppDelegate.swift in Sources */,
 				D4310ED91DC35882009EE5D2 /* GameScene.swift in Sources */,
@@ -533,7 +554,10 @@
 				D4310EE01DC39245009EE5D2 /* GameController.swift in Sources */,
 				D467A3A31DB7C33A00005551 /* SubmissionButton.swift in Sources */,
 				D48D25A11DB6C3720009AEAC /* MainViewController.swift in Sources */,
+				D457AA241DC8134F00E7C1B7 /* TableViewCell.swift in Sources */,
+				D457AA221DC7FBAC00E7C1B7 /* LeaderboardViewController.swift in Sources */,
 				D4DE57021DC681D5003D5AB2 /* LetterBlockTextField.swift in Sources */,
+				D457AA261DC8168700E7C1B7 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

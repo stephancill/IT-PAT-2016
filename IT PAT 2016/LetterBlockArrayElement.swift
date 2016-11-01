@@ -71,20 +71,9 @@ class LetterBlockArrayElement: UIView, UITextFieldDelegate {
 		widthAnchor.constraint(equalToConstant: width).isActive = true
 		heightAnchor.constraint(equalToConstant: 37).isActive = true
 		
-		
-		
 		if !first {
 			textField.previous = previous?.textField
 		}
-		
-		textField.placeholder = "."
-		textField.translatesAutoresizingMaskIntoConstraints = false
-		textField.keyboardType = .alphabet
-		textField.autocapitalizationType = .none
-		textField.autocorrectionType = .no
-		textField.returnKeyType = .done
-		textField.textAlignment = .center
-		textField.isUserInteractionEnabled = true
 		textField.delegate = self
 
 		addSubview(textField)

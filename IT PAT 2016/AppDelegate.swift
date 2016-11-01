@@ -14,25 +14,7 @@ import HNKWordLookup
 let uc = UserController()
 let dbc = DatabaseController()
 let gc = GameController()
-
-// Set up alert controller
-let defaultAlertMessage = "Something isn't quite right, try again."
-
-let alertController: UIAlertController = {
-	let alert: UIAlertController = UIAlertController(title: "Oops...", message: defaultAlertMessage, preferredStyle: .alert)
-	alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {(alertAction: UIAlertAction!) in
-		resetAlertMessage()
-	}))
-	return alert
-}()
-
-func alertUser(viewController: UIViewController, message: String?=alertController.message!) {
-	alertController.message = message
-	viewController.present(alertController, animated: true, completion: nil)
-}
-func resetAlertMessage() {
-	alertController.message = defaultAlertMessage
-}
+var topScores: NSDictionary?
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,6 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		FIRApp.configure()
 		dbc.configure()
 		gc.configure()
+		
+		if (UserDefaults.standard.object(forKey: "speakingSpeed") == nil){
+			UserDefaults.standard.set(0.4, forKey: "speakingSpeed")
+		}
+		
+		if (UserDefaults.standard.object(forKey: "startingDifficulty") == nil){
+			UserDefaults.standard.set(1, forKey: "startingDifficulty")
+		}
 		return true
 	}
 
@@ -71,3 +61,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+// Set up alert controller
+let defaultAlertMessage = "Something isn't quite right, try again."
+
+let alertController: UIAlertController = {
+	let alert: UIAlertController = UIAlertController(title: "Oops...", message: defaultAlertMessage, preferredStyle: .alert)
+	alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {(alertAction: UIAlertAction!) in
+		resetAlertMessage()
+	}))
+	return alert
+}()
+
+func alertUser(viewController: UIViewController, message: String?=alertController.message!) {
+	alertController.message = message
+	viewController.present(alertController, animated: true, completion: nil)
+}
+func resetAlertMessage() {
+	alertController.message = defaultAlertMessage
+}
+

@@ -24,6 +24,7 @@ class LetterBlockArray: UIView {
 		self.parentCenterYAnchor = parentCenterYAnchor
 		super.init(frame: CGRect.zero)
 		translatesAutoresizingMaskIntoConstraints = false
+//		self.backgroundColor = UIColor.green
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -34,6 +35,27 @@ class LetterBlockArray: UIView {
 		for block in letterBlocks {
 			block.textField.text = ""
 		}
+		superview?.endEditing(true)
+		letterBlocks.first?.textField.becomeFirstResponder()
+		
+	}
+	
+	func text() -> String {
+		var text = ""
+		for block in letterBlocks {
+			text = "\(text)\(block.textField.text!)"
+		}
+		return text
+	}
+	
+	func updateBlockCount(with letterBlocks: Int) {
+		for block in self.letterBlocks {
+			block.removeFromSuperview()
+		}
+		self.letterBlocks = []
+		self.letterBlocksCount = letterBlocks
+		print("HELLO \(CGFloat(256)-CGFloat(((letterBlocks+4)*10)))")
+		setup()
 	}
 	
 	func setup() {
