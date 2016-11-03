@@ -9,7 +9,10 @@
 import UIKit
 
 class LetterBlockArray: UIView {
-
+	/*
+	An array of linked LetterBlockArrayElements which function as a single text field
+	*/
+	
 	var letterBlocks: [LetterBlockArrayElement]
 	var letterBlocksCount: Int
 	var width: CGFloat
@@ -24,7 +27,6 @@ class LetterBlockArray: UIView {
 		self.parentCenterYAnchor = parentCenterYAnchor
 		super.init(frame: CGRect.zero)
 		translatesAutoresizingMaskIntoConstraints = false
-//		self.backgroundColor = UIColor.green
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -32,6 +34,9 @@ class LetterBlockArray: UIView {
 	}
 	
 	func clear() {
+		/*
+		Clear all LetterBlockArrayElements
+		*/
 		for block in letterBlocks {
 			block.textField.text = ""
 		}
@@ -41,6 +46,9 @@ class LetterBlockArray: UIView {
 	}
 	
 	func text() -> String {
+		/*
+		Get text from LetterBlockArrayElements
+		*/
 		var text = ""
 		for block in letterBlocks {
 			text = "\(text)\(block.textField.text!)"
@@ -49,6 +57,9 @@ class LetterBlockArray: UIView {
 	}
 	
 	func updateBlockCount(with letterBlocks: Int) {
+		/*
+		Change size of array
+		*/
 		for block in self.letterBlocks {
 			block.removeFromSuperview()
 		}
@@ -59,6 +70,9 @@ class LetterBlockArray: UIView {
 	}
 	
 	func setup() {
+		/*
+		Set up UI constraints
+		*/
 		self.letterBlocks.append(LetterBlockArrayElement(width: round((width-CGFloat(letterBlocksCount+1*10))/CGFloat(letterBlocksCount)), leftMargin: self.leftAnchor, parentYAnchor: self.centerYAnchor))
 		self.letterBlocks[0].first = true
 		self.addSubview(self.letterBlocks[0])

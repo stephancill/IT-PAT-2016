@@ -141,7 +141,7 @@ class GameController {
 			answerCorrect()
 		} else if text.characters.count >= currentWord.characters.count {
 			// Incorrect
-			gameViewController?.scene?.animateInputContainerView(to: #colorLiteral(red: 0.7995337248, green: 0.2348510623, blue: 0.3945492506, alpha: 1) )
+			gameViewController?.scene?.animateBackground(to: #colorLiteral(red: 0.7995337248, green: 0.2348510623, blue: 0.3945492506, alpha: 1) )
 			levelCorrect = 0
 			gameIncorrect += 1
 			gameViewController?.scene?.xArray.displayNext()
@@ -202,7 +202,7 @@ class GameController {
 		}
 		
 		gameViewController?.scene?.animateCorrectAnswer()
-		gameViewController?.scene?.animateInputContainerView(to: #colorLiteral(red: 0.328330636, green: 0.693198204, blue: 0.3570930958, alpha: 1) )
+		gameViewController?.scene?.animateBackground(to: #colorLiteral(red: 0.328330636, green: 0.693198204, blue: 0.3570930958, alpha: 1) )
 		for block in (gameViewController?.scene?.inputContainerView?.letterBlocks)! {
 			block.textField.text = ""
 		}

@@ -9,14 +9,9 @@
 import UIKit
 
 class LetterBlockTextField: UITextField {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+	/*
+	Custom text field that moves to a linked text field when delete is pressed if the text field is empty
+	*/
 	
 	var previous: LetterBlockTextField?
 	

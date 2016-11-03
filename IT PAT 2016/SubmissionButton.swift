@@ -9,14 +9,9 @@
 import UIKit
 
 class SubmissionButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+	/*
+	Subclass of UIButton with standard application style
+	*/
 
 	required init(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)!
@@ -28,9 +23,6 @@ class SubmissionButton: UIButton {
 		self.setTitle(named, for: .normal)
 		self.setup()
 	}
-//	override init(frame: CGRect) {
-//		
-//	}
 	
 	func setup() {
 		translatesAutoresizingMaskIntoConstraints = false

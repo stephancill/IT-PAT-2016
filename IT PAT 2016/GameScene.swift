@@ -90,7 +90,9 @@ class GameScene: SKScene {
 	}
 	
 	func setupUI() {
-		
+		/*
+		Set up UI constraints
+		*/
 		view?.addSubview(helpButton)
 		helpButton.rightAnchor.constraint(equalTo: (view?.rightAnchor)!, constant: -10).isActive = true
 		helpButton.topAnchor.constraint(equalTo: (view?.topAnchor)!, constant: 50).isActive = true
@@ -152,7 +154,10 @@ class GameScene: SKScene {
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
-	func animateInputContainerView(to color: UIColor) {
+	func animateBackground(to color: UIColor) {
+		/*
+		Change background colour
+		*/
 		background.run(SKAction.sequence([
 			SKAction.colorize(with: color, colorBlendFactor: 1, duration: 0.5),
 			SKAction.colorize(with: defaultBackgroundColor, colorBlendFactor: 1, duration: 0.5)
@@ -160,6 +165,9 @@ class GameScene: SKScene {
 	}
 	
 	func animateCorrectAnswer() {
+		/*
+		Display word label
+		*/
 		let correctAnswerLabel: SKLabelNode = {
 			let label = SKLabelNode(fontNamed: "ComicSansMS")
 			label.text = gc.currentWord
@@ -187,6 +195,9 @@ class GameScene: SKScene {
 	}
 	
 	func animateScoreChange(new points: Int, with color: UIColor, wait: Bool?=true) {
+		/*
+		Score change animation
+		*/
 		var actions = [
 			SKAction.customAction(withDuration: 0, actionBlock: { (SKNode) in
 				self.scoreLabel.text = "\(points)"
@@ -207,6 +218,10 @@ class GameScene: SKScene {
 	}
 	
 	func showHelp() {
+		/*
+		Present alert that contains useful information
+		*/
+		
 		let alertController: UIAlertController = {
 			let alert: UIAlertController = UIAlertController(title: "Help", message: "Type out what you hear the voice say. The definition is there to help you. Press ? to fill in a single letter for you or skip the word if you don't know it.", preferredStyle: .alert)
 			alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {(alertAction: UIAlertAction!) in
@@ -235,6 +250,10 @@ class GameScene: SKScene {
 	}
 	
 	func gameOver() {
+		/*
+		End game, reset scene, show game details and present main menu
+		*/
+		
 		var title = "Game Over"
 		if gc.currentScore > gc.currentHighScore {
 			title = "New High Score"
@@ -256,6 +275,9 @@ class GameScene: SKScene {
 	}
 	
 	private func reset() {
+		/*
+		Remove all subviews (clear scene)
+		*/
 		gc.reset()
 		for v in (view?.subviews)! {
 			v.removeFromSuperview()

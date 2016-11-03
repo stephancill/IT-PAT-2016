@@ -9,6 +9,9 @@
 import UIKit
 
 class LetterBlockArrayElement: UIView, UITextFieldDelegate {
+	/*
+	View that contains a single text field, is part of an array of LetterBlockArrayElements
+	*/
 	
 	var previous: LetterBlockArrayElement?
 	var following: LetterBlockArrayElement?
@@ -33,6 +36,9 @@ class LetterBlockArrayElement: UIView, UITextFieldDelegate {
 	}
 	
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		/*
+		Prevent more than one character from being entered
+		*/
 		print("HELLO \(string)")
 		let currentCharacterCount = textField.text?.characters.count ?? 0
 		if (range.length + range.location > currentCharacterCount){
@@ -44,6 +50,7 @@ class LetterBlockArrayElement: UIView, UITextFieldDelegate {
 	
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 		DispatchQueue.main.async {
+			// Select all text when cursor enters
 			textField.selectAll(nil)
 		}
 		return true
@@ -51,7 +58,9 @@ class LetterBlockArrayElement: UIView, UITextFieldDelegate {
 	
 	
 	func setupView() {
-		
+		/*
+		Set view constraints and method selectors
+		*/
 		backgroundColor = UIColor.white
 		translatesAutoresizingMaskIntoConstraints = false
 		layer.cornerRadius = 12
@@ -90,6 +99,9 @@ class LetterBlockArrayElement: UIView, UITextFieldDelegate {
 	}
 	
 	@objc private func nonLastBlockChanged() {
+		/*
+		Send cursor to next text field in array and check answer if there are enough letters
+		*/
 		if (textField.text?.characters.count)! > 0 {
 			textField.resignFirstResponder()
 			let _ = following?.textField.becomeFirstResponder()

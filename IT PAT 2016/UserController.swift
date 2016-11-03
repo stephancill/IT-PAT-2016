@@ -36,7 +36,6 @@ class UserController {
 		/*
 		Log user in, move to next view
 		*/
-		
 		activityIndicator?.show(parentView: (loginViewController?.view)!)
 		FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
 			if error != nil {
@@ -73,9 +72,8 @@ class UserController {
 	
 	func handleRegister(email: String, password: String) {
 		/*
-		Handle user register, go to next screen
+		Handle user register, move to next view
 		*/
-		
 		activityIndicator?.show(parentView: (loginViewController?.view)!)
 		FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
 			if error != nil {

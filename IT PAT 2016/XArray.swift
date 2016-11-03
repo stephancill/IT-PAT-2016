@@ -9,6 +9,9 @@
 import SpriteKit
 
 class XArray: SKNode {
+	/*
+	Initialize array of Xs to indicate how many incorrect answers a user has entered
+	*/
 	
 	var nodes: [SKSpriteNode]
 	

@@ -10,6 +10,10 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
+	/*
+	Simple subclass of UITableViewCell that contains a UILabel
+	*/
+	
     @IBOutlet var textField: UILabel!
 	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

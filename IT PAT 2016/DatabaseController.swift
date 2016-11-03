@@ -59,7 +59,6 @@ class DatabaseController {
 		/*
 		Set populate global topScores variable
 		*/
-		
 		var value: NSDictionary?
 		let topScoresQuery = ref?.child("scores").queryOrderedByKey()
 		topScoresQuery?.observe(.value, with: { (snapshot) in

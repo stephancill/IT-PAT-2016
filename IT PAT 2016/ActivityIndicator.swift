@@ -23,6 +23,9 @@ class ActivityIndicator: UIView {
 	}
 	
 	func show(parentView: UIView) {
+		/*
+		Present Activity Indicator
+		*/
 		self.parentView = parentView
 		DispatchQueue.main.async {
 			self.loadingView = UIView()
@@ -44,6 +47,9 @@ class ActivityIndicator: UIView {
 	}
 	
 	func hide() {
+		/*
+		Hide Activity Indicator
+		*/
 		DispatchQueue.main.async {
 			self.spinner.stopAnimating()
 			self.loadingView.removeFromSuperview()
