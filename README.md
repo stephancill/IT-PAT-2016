@@ -20,4 +20,4 @@ Spelling and dictation app.
 
 ## Running
 1. Copy your `GoogleService-Info.plist` ([Request access to download mine](https://drive.google.com/a/parklands.co.za/file/d/0B3GdzC4Z5EllZGZCV3Q3b2E0Rms/view?usp=sharing)) file into `IT PAT 2016/IT PAT 2016/` directory.
-2. Press the Play button in Xcode to launch the application on the selected simulator.
+2. Press the Play button in Xcode to launch the application on the selected simulator platform.
