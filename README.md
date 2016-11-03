@@ -17,3 +17,7 @@ Spelling and dictation app.
 3. Change directory `cd IT-PAT-2016`
 4. Install CocoaPods dependencies `pod install`
 5. Open project workspace `open -a Xcode IT\ PAT\ 2016.xcworkspace`
+
+## Running
+1. Copy your `GoogleService-Info.plist` file into `IT PAT 2016/IT PAT 2016/` directory.
+2. Press the Play button in Xcode to launch the application on the selected simulator.
