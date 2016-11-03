@@ -19,5 +19,5 @@ Spelling and dictation app.
 5. Open project workspace `open -a Xcode IT\ PAT\ 2016.xcworkspace`
 
 ## Running
-1. Copy your `GoogleService-Info.plist` file into `IT PAT 2016/IT PAT 2016/` directory.
+1. Copy your `GoogleService-Info.plist` ([download](https://drive.google.com/a/parklands.co.za/file/d/0B3GdzC4Z5EllZGZCV3Q3b2E0Rms/view?usp=sharing)) file into `IT PAT 2016/IT PAT 2016/` directory.
 2. Press the Play button in Xcode to launch the application on the selected simulator.
