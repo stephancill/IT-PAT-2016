@@ -182,7 +182,9 @@ class LoginViewController: UIViewController {
 		// Open website URL in default browser
 		let targetURL = URL(string: "https://stephancill.github.io/IT-PAT-2016/")
 		let application = UIApplication.shared
-		application.openURL(targetURL!)
+		application.open(targetURL!, options: [:]) { (bool) in
+			()
+		}
 	}
 	
 	// Offset view to ensure visibility of all buttons/input fields.
